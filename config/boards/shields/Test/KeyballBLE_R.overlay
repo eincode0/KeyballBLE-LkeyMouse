@@ -8,18 +8,14 @@
 
 &kscan0 {
     col-gpios
-        = <&xiao_d 10 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 9 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 8 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 7 GPIO_ACTIVE_HIGH>
-        , <&gpio0 10 GPIO_ACTIVE_HIGH>
-        ;
+        = <&xiao_d 10 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 9 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 8 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 7 GPIO_ACTIVE_HIGH>,
+          <&gpio0 10 GPIO_ACTIVE_HIGH>;
 };
 
 / {
-    /* ===============================
-     * スクロール品質向上（端数繰り越し）
-     * =============================== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -30,14 +26,9 @@
         };
     };
 
-    /* ===============================
-     * トラックボール入力
-     * =============================== */
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
-        /* 速度は変えず、端数だけ貯める（品質優先） */
         input-processors = <&tb_wheel_rema 1 1>;
     };
 };
@@ -46,24 +37,22 @@
     spi0_default: spi0_default {
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 4)>,
-                <NRF_PSEL(SPIM_MISO, 0, 4)>;
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
             low-power-enable;
         };
     };
 };
 
-&xiao_serial {
-    status = "disabled";
-};
+&xiao_serial { status = "disabled"; };
 
 &spi0 {
     status = "okay";
@@ -79,8 +68,6 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
-        /* スクロールレイヤー指定（既存設定維持） */
         scroll-layers = <5>;
     };
 };
