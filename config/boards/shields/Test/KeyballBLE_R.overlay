@@ -2,14 +2,14 @@
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
-
-#include <dt-bindings/zmk/keys.h>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
+/* col-offset */
 &default_transform {
     col-offset = <6>;
 };
 
+/* col-gpios */
 &kscan0 {
     col-gpios
         = <&xiao_d 10 GPIO_ACTIVE_HIGH>
@@ -21,6 +21,9 @@
 };
 
 / {
+    /* ===============================
+     * スクロール端数繰り越し（品質優先）
+     * =============================== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -30,35 +33,69 @@
             track-remainders;
         };
     };
+
+    /* ===============================
+     * トラックボール入力 → プロセッサ適用
+     *  - 動いた瞬間だけ layer 13 を 200ms ON
+     *  - その間だけ gesture を有効化
+     *  - wheel 端数繰り越しは常時
+     * =============================== */
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        input-processors = <
+            &zip_temp_layer 13 200
+            &zip_mouse_gesture
+            &tb_wheel_rema 1 1
+        >;
+    };
 };
 
+/* ===============================
+ * ジェスチャ設定（わかりやすい定番）
+ * =============================== */
 &zip_mouse_gesture {
-    stroke-size = <80>;
+    stroke-size = <150>;
     enable-eager-mode;
-    idle-timeout-ms = <350>;
+    idle-timeout-ms = <200>;
 
-    test_a {
+    /* 上：Mission Control */
+    mission_control {
+        pattern = <GESTURE_UP>;
+        bindings = <&kp LC(UP_ARROW)>;
+    };
+
+    /* 下：App Exposé */
+    app_expose {
+        pattern = <GESTURE_DOWN>;
+        bindings = <&kp LC(DOWN_ARROW)>;
+    };
+
+    /* 左：戻る / 右：進む（ブラウザ系） */
+    back {
+        pattern = <GESTURE_LEFT>;
+        bindings = <&kp LG(LBKT)>;
+    };
+
+    forward {
         pattern = <GESTURE_RIGHT>;
-        bindings = <&kp A>;
+        bindings = <&kp LG(RBKT)>;
     };
 
-    bootloader {
-        pattern = <GESTURE_DOWN GESTURE_RIGHT GESTURE_UP>;
-        bindings = <&bootloader>;
+    /* 右→左：デスクトップ左 / 左→右：デスクトップ右 */
+    desktop_left {
+        pattern = <GESTURE_RIGHT GESTURE_LEFT>;
+        bindings = <&kp LC(LEFT_ARROW)>;
+    };
+
+    desktop_right {
+        pattern = <GESTURE_LEFT GESTURE_RIGHT>;
+        bindings = <&kp LC(RIGHT_ARROW)>;
     };
 };
 
-trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-
-    input-processors = <
-        &zip_temp_layer 13 200
-        &zip_mouse_gesture
-        &tb_wheel_rema 1 1
-    >;
-};
-
+/* SPI pinctrl */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -82,8 +119,12 @@ trackball_listener {
     };
 };
 
-&xiao_serial { status = "disabled"; };
+/* UART無効 */
+&xiao_serial {
+    status = "disabled";
+};
 
+/* SPI0 + PMW3610 */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
@@ -98,6 +139,8 @@ trackball_listener {
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
+        /* スクロールレイヤー（あなたの現行維持） */
         scroll-layers = <5>;
     };
 };
