@@ -29,19 +29,20 @@
         };
     };
 
-    /* Prospectorと同じ：入力が来たら一時レイヤーをON */
+    /* 入力が来たら一時レイヤーON（Prospector方式） */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
         input-processors = <
             &zip_temp_layer 13 200
+            &zip_mouse_gesture
             &tb_wheel_rema 1 1
         >;
     };
 };
 
-/* Prospectorと同じ：zip_mouse_gesture の設定だけを書く */
+/* ↓ → ↑ で bootloader */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
