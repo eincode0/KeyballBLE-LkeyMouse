@@ -1,12 +1,17 @@
+/* ===============================
+ * KeyballBLE_R.overlay（全貼り替え / レイヤー紐付け）
+ *  - tb_wheel_rema：スクロール端数繰り越し（常時）
+ *  - zmk-mouse-gesture：定義だけここ（有効化はkeymap側）
+ * =============================== */
+
 #include "KeyballBLE.dtsi"
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/keys.h> /* ★LC()/LG() 必須 */
 
-&default_transform {
-    col-offset = <6>;
-};
+&default_transform { col-offset = <6>; };
 
 &kscan0 {
     col-gpios
@@ -18,7 +23,7 @@
         ;
 };
 
-/ {
+ / {
     /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
@@ -30,50 +35,42 @@
         };
     };
 
-    /* トラックボール入力 → ジェスチャ（常時） → 端数繰り越し */
+    /* トラックボール入力 → 端数繰り越し（ジェスチャはここで噛ませない） */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
-        input-processors = <
-            &zip_mouse_gesture
-            &tb_wheel_rema 1 1
-        >;
+        input-processors = <&tb_wheel_rema 1 1>;
     };
 };
 
-/* ジェスチャ設定（分かりやすい単発） */
+/* ジェスチャ定義（レイヤー13中だけ有効になる想定） */
 &zip_mouse_gesture {
-    /* まず出やすい値に寄せる */
-    stroke-size = <60>;        /* 小さくして出やすく */
-    idle-timeout-ms = <350>;   /* 少し長め */
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
     enable-eager-mode;
 
-    /* Mission Control : Ctrl + ↑ */
     mission_control {
         pattern = <GESTURE_UP>;
         bindings = <&kp LC(UP_ARROW)>;
     };
 
-    /* App Exposé : Ctrl + ↓ */
     app_expose {
         pattern = <GESTURE_DOWN>;
         bindings = <&kp LC(DOWN_ARROW)>;
     };
 
-    /* 戻る : Cmd + [ */
     back {
         pattern = <GESTURE_LEFT>;
         bindings = <&kp LG(LBKT)>;
     };
 
-    /* 進む : Cmd + ] */
     forward {
         pattern = <GESTURE_RIGHT>;
         bindings = <&kp LG(RBKT)>;
     };
 };
 
+/* SPI / PMW3610 */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
