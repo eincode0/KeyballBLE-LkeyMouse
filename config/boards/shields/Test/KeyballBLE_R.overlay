@@ -19,7 +19,6 @@
 };
 
 / {
-    /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -30,14 +29,19 @@
         };
     };
 
-    /* ★ temp-layer をここで自前定義（#cells=2 を保証） */
-    /omit-if-no-ref/ kb_temp_layer: kb_temp_layer {
-        compatible = "zmk,input-processor-temp-layer";
-        #input-processor-cells = <2>;
+    /* Prospectorと同じ：入力が来たら一時レイヤーをON */
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        input-processors = <
+            &zip_temp_layer 13 200
+            &tb_wheel_rema 1 1
+        >;
     };
 };
 
-/* zmk-mouse-gesture 設定（例：↓→↑でbootloader） */
+/* Prospectorと同じ：zip_mouse_gesture の設定だけを書く */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
@@ -46,35 +50,6 @@
     bootloader {
         pattern = <GESTURE_DOWN GESTURE_RIGHT GESTURE_UP>;
         bindings = <&bootloader>;
-    };
-};
-
-/* トラックボール入力（新規ノード定義） */
-trackball_listener: trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-
-    /* 常時：動いたら layer13 を 200ms だけON */
-    input-processors = <
-        &kb_temp_layer 13 200
-    >;
-
-    /* layer13：gesture を通す */
-    gesture_layer {
-        layers = <13>;
-        input-processors = <
-            &zip_mouse_gesture
-        >;
-        process-next;
-    };
-
-    /* layer5：WHEEL端数繰り越し */
-    scroll_layer {
-        layers = <5>;
-        input-processors = <
-            &tb_wheel_rema 1 1
-        >;
-        process-next;
     };
 };
 
@@ -101,9 +76,7 @@ trackball_listener: trackball_listener {
     };
 };
 
-&xiao_serial {
-    status = "disabled";
-};
+&xiao_serial { status = "disabled"; };
 
 &spi0 {
     status = "okay";
@@ -119,7 +92,6 @@ trackball_listener: trackball_listener {
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
         scroll-layers = <5>;
     };
 };
