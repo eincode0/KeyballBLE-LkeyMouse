@@ -1,40 +1,8 @@
-name: Build KeyballBLE
-
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        shield: [KeyballBLE_L, KeyballBLE_R, settings_reset]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install west
-        run: pip3 install west
-
-      - name: Init west workspace
-        run: |
-          west init -l config
-          west update
-
-      - name: Build firmware
-        run: |
-          west build -s zmk/app -b seeeduino_xiao_ble \
-            -d build/${{ matrix.shield }} \
-            -- \
-            -DSHIELD=${{ matrix.shield }} \
-            -DZMK_CONFIG=config
-
-      - name: Upload firmware
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main      - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.shield }}
