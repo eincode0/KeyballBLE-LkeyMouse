@@ -1,7 +1,5 @@
 #include "KeyballBLE.dtsi"
-
 #include <input/processors.dtsi>
-#include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
@@ -10,12 +8,11 @@
 
 &kscan0 {
     col-gpios
-        = <&xiao_d 10 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 9 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 8 GPIO_ACTIVE_HIGH>
-        , <&xiao_d 7 GPIO_ACTIVE_HIGH>
-        , <&gpio0 10 GPIO_ACTIVE_HIGH>
-        ;
+        = <&xiao_d 10 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 9 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 8 GPIO_ACTIVE_HIGH>,
+          <&xiao_d 7 GPIO_ACTIVE_HIGH>,
+          <&gpio0 10 GPIO_ACTIVE_HIGH>;
 };
 
 / {
@@ -29,49 +26,27 @@
         };
     };
 
-    /* 入力が来たら一時レイヤーON（Prospector方式） */
-    trackball_listener: trackball_listener {
+    trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
-        input-processors = <
-            &zip_temp_layer 13 200
-            &zip_mouse_gesture
-            &tb_wheel_rema 1 1
-        >;
-    };
-};
-
-/* ↓ → ↑ で bootloader */
-&zip_mouse_gesture {
-    stroke-size = <150>;
-    enable-eager-mode;
-    idle-timeout-ms = <200>;
-
-    bootloader {
-        pattern = <GESTURE_DOWN GESTURE_RIGHT GESTURE_UP>;
-        bindings = <&bootloader>;
+        input-processors = <&tb_wheel_rema 1 1>;
     };
 };
 
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <
-                NRF_PSEL(SPIM_SCK, 0, 5)
-                NRF_PSEL(SPIM_MOSI, 0, 4)
-                NRF_PSEL(SPIM_MISO, 0, 4)
-            >;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
-            psels = <
-                NRF_PSEL(SPIM_SCK, 0, 5)
-                NRF_PSEL(SPIM_MOSI, 0, 4)
-                NRF_PSEL(SPIM_MISO, 0, 4)
-            >;
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
             low-power-enable;
         };
     };
