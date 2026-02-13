@@ -369,6 +369,7 @@
         };
 
         /* レイヤー13（ジェスチャ専用）：全透過 */
+        /* レイヤー13（ジェスチャ専用）：全透過 */
         GESTURE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
@@ -377,8 +378,6 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
-            /* ★安全：未定義になり得る &none を使わない */
-            sensor-bindings = <&trans>;
-        };
+            /* ★sensor-bindings は “未指定” が安全。消す。 */
     };
 };
