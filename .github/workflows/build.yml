@@ -1,5 +1,13 @@
+name: Build KeyballBLE
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+    with:
+      build_matrix: |
+        [
+          { "board": "seeeduino_xiao_ble", "shield": "KeyballBLE_L" },
+          { "board": "seeeduino_xiao_ble", "shield": "KeyballBLE_R" },
+          { "board": "seeeduino_xiao_ble", "shield": "settings_reset" }
+        ]
