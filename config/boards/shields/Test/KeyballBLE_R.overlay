@@ -61,7 +61,7 @@
  * ※ まずは “単発4方向” だけにして安定させる
  * =============================== */
 &zip_mouse_gesture {
-    stroke-size = <150>;
+    stroke-size = <120>;
     enable-eager-mode;
     idle-timeout-ms = <200>;
 
