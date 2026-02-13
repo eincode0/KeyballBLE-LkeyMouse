@@ -1,16 +1,22 @@
+/* ===============================
+ * KeyballBLE_R.overlay（全貼り替え）
+ *  - tb_wheel_rema：スクロール端数繰り越し（常時）
+ *  - zmk-mouse-gesture：ジェスチャ（ここで定義）
+ *  - trackball_listener：入力プロセッサ接続（zip_temp_layer + tb_wheel_rema）
+ * =============================== */
+
 #include "KeyballBLE.dtsi"
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>   /* ←これが無いとNRF_PSELで落ちる */
+#include <dt-bindings/zmk/keys.h>   /* ★これが無いと LC()/LG() 等で落ちる */
 
-/* col-offset */
+/* col-offset は既存通り */
 &default_transform {
     col-offset = <6>;
 };
 
-/* col-gpios */
 &kscan0 {
     col-gpios
         = <&xiao_d 10 GPIO_ACTIVE_HIGH>
@@ -22,7 +28,7 @@
 };
 
 / {
-    /* スクロール端数繰り越し */
+    /* 端数繰り越し（ヌルヌル優先） */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -33,20 +39,27 @@
         };
     };
 
-    /* トラックボール入力 → temp layer + gesture + rema */
-    trackball_listener {
+    /* トラックボール入力 → 一時レイヤーON + 端数繰り越し */
+    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
         input-processors = <
-            &zip_temp_layer 13 200
-            &zip_mouse_gesture
-            &tb_wheel_rema 1 1
+            &zip_temp_layer 13 200   /* ボールが動いたら 200ms だけレイヤー13 */
+            &tb_wheel_rema  1 1      /* スクロール端数を貯める */
         >;
     };
 };
 
-/* ジェスチャ（わかりやすい定番） */
+/* ===============================
+ * ジェスチャ定義（わかりやすい版）
+ *  UP    : Mission Control (Ctrl + ↑)
+ *  DOWN  : App Exposé     (Ctrl + ↓)
+ *  LEFT  : 戻る          (Cmd + [)
+ *  RIGHT : 進む          (Cmd + ])
+ *
+ * ※ まずは “単発4方向” だけにして安定させる
+ * =============================== */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
@@ -71,19 +84,11 @@
         pattern = <GESTURE_RIGHT>;
         bindings = <&kp LG(RBKT)>;
     };
-
-    desktop_left {
-        pattern = <GESTURE_RIGHT GESTURE_LEFT>;
-        bindings = <&kp LC(LEFT_ARROW)>;
-    };
-
-    desktop_right {
-        pattern = <GESTURE_LEFT GESTURE_RIGHT>;
-        bindings = <&kp LC(RIGHT_ARROW)>;
-    };
 };
 
-/* SPI pinctrl */
+/* ===============================
+ * SPI / PMW3610
+ * =============================== */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
@@ -107,12 +112,8 @@
     };
 };
 
-/* UART無効 */
-&xiao_serial {
-    status = "disabled";
-};
+&xiao_serial { status = "disabled"; };
 
-/* SPI0 + PMW3610 */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
