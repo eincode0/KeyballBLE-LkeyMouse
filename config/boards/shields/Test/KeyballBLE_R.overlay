@@ -4,18 +4,6 @@
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-/* -------------------------------------------------
- * GESTURE_* 定数ヘッダは環境でファイル名が違うことがある
- * -> 存在するものを自動で include
- * ------------------------------------------------- */
-#if __has_include(<dt-bindings/zmk/mouse-gesture.h>)
-  #include <dt-bindings/zmk/mouse-gesture.h>
-#elif __has_include(<dt-bindings/zmk/mouse_gesture.h>)
-  #include <dt-bindings/zmk/mouse_gesture.h>
-#elif __has_include(<dt-bindings/zmk/gesture.h>)
-  #include <dt-bindings/zmk/gesture.h>
-#endif
-
 &default_transform {
     col-offset = <6>;
 };
@@ -31,6 +19,7 @@
 };
 
 / {
+    /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -40,11 +29,15 @@
             track-remainders;
         };
     };
+
+    /* ★ temp-layer をここで自前定義（#cells=2 を保証） */
+    /omit-if-no-ref/ kb_temp_layer: kb_temp_layer {
+        compatible = "zmk,input-processor-temp-layer";
+        #input-processor-cells = <2>;
+    };
 };
 
-/* ===============================
- * zmk-mouse-gesture 設定
- * =============================== */
+/* zmk-mouse-gesture 設定（例：↓→↑でbootloader） */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
@@ -56,17 +49,17 @@
     };
 };
 
-/* ===============================
- * トラックボール入力（新規ノード）
- * =============================== */
+/* トラックボール入力（新規ノード定義） */
 trackball_listener: trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
 
+    /* 常時：動いたら layer13 を 200ms だけON */
     input-processors = <
-        &zip_temp_layer 13 200
+        &kb_temp_layer 13 200
     >;
 
+    /* layer13：gesture を通す */
     gesture_layer {
         layers = <13>;
         input-processors = <
@@ -75,6 +68,7 @@ trackball_listener: trackball_listener {
         process-next;
     };
 
+    /* layer5：WHEEL端数繰り越し */
     scroll_layer {
         layers = <5>;
         input-processors = <
