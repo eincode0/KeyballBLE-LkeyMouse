@@ -55,13 +55,14 @@
  *  - layer13: zip_mouse_gesture を通す
  *  - layer5 : tb_wheel_rema を通す（スクロール時だけ）
  * =============================== */
-&trackball_listener {
-    /* 常時 */
+trackball_listener: trackball_listener {
+    compatible = "zmk,input-listener";
+    device = <&trackball>;
+
     input-processors = <
         &zip_temp_layer 13 200
     >;
 
-    /* ジェスチャ（レイヤー13の時だけ） */
     gesture_layer {
         layers = <13>;
         input-processors = <
@@ -70,7 +71,6 @@
         process-next;
     };
 
-    /* スクロール（レイヤー5の時だけ） */
     scroll_layer {
         layers = <5>;
         input-processors = <
