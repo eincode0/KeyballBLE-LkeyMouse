@@ -1,5 +1,9 @@
 #include "KeyballBLE.dtsi"
+
 #include <input/processors.dtsi>
+#include <behaviors/input_processor_temp_layer.dtsi>
+#include <mouse-gesture.dtsi>
+
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
@@ -19,6 +23,7 @@
 / {
     /* ===============================
      * スクロール品質向上（端数繰り越し）
+     *  - WHEEL専用なので「常時」には置かない
      * =============================== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
@@ -29,16 +34,51 @@
             track-remainders;
         };
     };
+};
 
-    /* ===============================
-     * トラックボール入力
-     * =============================== */
-    trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
+/* ===============================
+ * zmk-mouse-gesture 設定
+ * 例：↓ → ↑ で bootloader
+ * =============================== */
+&zip_mouse_gesture {
+    stroke-size = <150>;
+    enable-eager-mode;
+    idle-timeout-ms = <200>;
 
-        /* 速度は変えず、端数だけ貯める（品質優先） */
-        input-processors = <&tb_wheel_rema 1 1>;
+    bootloader {
+        pattern = <GESTURE_DOWN GESTURE_RIGHT GESTURE_UP>;
+        bindings = <&bootloader>;
+    };
+};
+
+/* ===============================
+ * トラックボール入力
+ *  - 常時: 動いたら layer13 を 200ms だけON（zip_temp_layer）
+ *  - layer13: zip_mouse_gesture を通す
+ *  - layer5 : tb_wheel_rema を通す（スクロール時だけ）
+ * =============================== */
+&trackball_listener {
+    /* 常時 */
+    input-processors = <
+        &zip_temp_layer 13 200
+    >;
+
+    /* ジェスチャ（レイヤー13の時だけ） */
+    gesture_layer {
+        layers = <13>;
+        input-processors = <
+            &zip_mouse_gesture
+        >;
+        process-next;
+    };
+
+    /* スクロール（レイヤー5の時だけ） */
+    scroll_layer {
+        layers = <5>;
+        input-processors = <
+            &tb_wheel_rema 1 1
+        >;
+        process-next;
     };
 };
 
