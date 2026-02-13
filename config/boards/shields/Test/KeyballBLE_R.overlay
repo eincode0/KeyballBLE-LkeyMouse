@@ -21,7 +21,6 @@
 };
 
 / {
-    /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -33,7 +32,6 @@
     };
 };
 
-/* ★分かりやすい検証：→ だけで A / ついでに ↓→↑ で bootloader */
 &zip_mouse_gesture {
     stroke-size = <80>;
     enable-eager-mode;
@@ -50,16 +48,10 @@
     };
 };
 
-/* トラックボール入力リスナー */
 trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
 
-    /*
-     * 1) 動いたら layer13 を 200ms だけON（キー無しで発動）
-     * 2) gesture 判定（on/off は keymap の layer_listeners 側で制御）
-     * 3) WHEEL端数繰り越し
-     */
     input-processors = <
         &zip_temp_layer 13 200
         &zip_mouse_gesture
@@ -106,8 +98,6 @@ trackball_listener {
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
-        /* 既存維持 */
         scroll-layers = <5>;
     };
 };
