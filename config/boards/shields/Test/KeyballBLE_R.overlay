@@ -1,18 +1,9 @@
-/* ===============================
- * KeyballBLE_R.overlay（全貼り替え）
- *  - tb_wheel_rema：スクロール端数繰り越し（常時）
- *  - zmk-mouse-gesture：ジェスチャ（ここで定義）
- *  - trackball_listener：入力プロセッサ接続（zip_temp_layer + tb_wheel_rema）
- * =============================== */
-
 #include "KeyballBLE.dtsi"
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <dt-bindings/zmk/keys.h>   /* ★これが無いと LC()/LG() 等で落ちる */
 
-/* col-offset は既存通り */
 &default_transform {
     col-offset = <6>;
 };
@@ -28,7 +19,7 @@
 };
 
 / {
-    /* 端数繰り越し（ヌルヌル優先） */
+    /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -39,56 +30,50 @@
         };
     };
 
-    /* トラックボール入力 → 一時レイヤーON + 端数繰り越し */
+    /* トラックボール入力 → ジェスチャ（常時） → 端数繰り越し */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
         input-processors = <
-            &zip_temp_layer 13 200   /* ボールが動いたら 200ms だけレイヤー13 */
-            &tb_wheel_rema  1 1      /* スクロール端数を貯める */
+            &zip_mouse_gesture
+            &tb_wheel_rema 1 1
         >;
     };
 };
 
-/* ===============================
- * ジェスチャ定義（わかりやすい版）
- *  UP    : Mission Control (Ctrl + ↑)
- *  DOWN  : App Exposé     (Ctrl + ↓)
- *  LEFT  : 戻る          (Cmd + [)
- *  RIGHT : 進む          (Cmd + ])
- *
- * ※ まずは “単発4方向” だけにして安定させる
- * =============================== */
+/* ジェスチャ設定（分かりやすい単発） */
 &zip_mouse_gesture {
-    stroke-size = <120>;
+    /* まず出やすい値に寄せる */
+    stroke-size = <60>;        /* 小さくして出やすく */
+    idle-timeout-ms = <350>;   /* 少し長め */
     enable-eager-mode;
-    idle-timeout-ms = <200>;
 
+    /* Mission Control : Ctrl + ↑ */
     mission_control {
         pattern = <GESTURE_UP>;
         bindings = <&kp LC(UP_ARROW)>;
     };
 
+    /* App Exposé : Ctrl + ↓ */
     app_expose {
         pattern = <GESTURE_DOWN>;
         bindings = <&kp LC(DOWN_ARROW)>;
     };
 
+    /* 戻る : Cmd + [ */
     back {
         pattern = <GESTURE_LEFT>;
         bindings = <&kp LG(LBKT)>;
     };
 
+    /* 進む : Cmd + ] */
     forward {
         pattern = <GESTURE_RIGHT>;
         bindings = <&kp LG(RBKT)>;
     };
 };
 
-/* ===============================
- * SPI / PMW3610
- * =============================== */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
