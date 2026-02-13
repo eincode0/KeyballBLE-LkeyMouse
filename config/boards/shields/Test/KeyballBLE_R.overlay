@@ -21,7 +21,6 @@
 / {
     /* ===============================
      * スクロール品質向上（端数繰り越し）
-     *  - WHEEL専用なので「常時」には置かない
      * =============================== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
@@ -50,19 +49,18 @@
 };
 
 /* ===============================
- * トラックボール入力
- *  - 常時: 動いたら layer13 を 200ms だけON（zip_temp_layer）
- *  - layer13: zip_mouse_gesture を通す
- *  - layer5 : tb_wheel_rema を通す（スクロール時だけ）
+ * トラックボール入力（新規ノード定義）
  * =============================== */
 trackball_listener: trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
 
+    /* 常時：動いたら layer13 を 200ms だけON */
     input-processors = <
         &zip_temp_layer 13 200
     >;
 
+    /* レイヤー13：gesture を通す */
     gesture_layer {
         layers = <13>;
         input-processors = <
@@ -71,6 +69,7 @@ trackball_listener: trackball_listener {
         process-next;
     };
 
+    /* レイヤー5：WHEEL端数繰り越し */
     scroll_layer {
         layers = <5>;
         input-processors = <
@@ -118,7 +117,6 @@ trackball_listener: trackball_listener {
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-        /* スクロールレイヤー指定（既存設定維持） */
         scroll-layers = <5>;
     };
 };
