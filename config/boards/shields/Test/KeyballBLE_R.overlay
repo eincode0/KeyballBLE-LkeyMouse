@@ -2,8 +2,19 @@
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
-#include <dt-bindings/zmk/mouse-gesture.h>   // ← これ追加
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/* -------------------------------------------------
+ * GESTURE_* 定数ヘッダは環境でファイル名が違うことがある
+ * -> 存在するものを自動で include
+ * ------------------------------------------------- */
+#if __has_include(<dt-bindings/zmk/mouse-gesture.h>)
+  #include <dt-bindings/zmk/mouse-gesture.h>
+#elif __has_include(<dt-bindings/zmk/mouse_gesture.h>)
+  #include <dt-bindings/zmk/mouse_gesture.h>
+#elif __has_include(<dt-bindings/zmk/gesture.h>)
+  #include <dt-bindings/zmk/gesture.h>
+#endif
 
 &default_transform {
     col-offset = <6>;
@@ -31,6 +42,9 @@
     };
 };
 
+/* ===============================
+ * zmk-mouse-gesture 設定
+ * =============================== */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
@@ -42,6 +56,9 @@
     };
 };
 
+/* ===============================
+ * トラックボール入力（新規ノード）
+ * =============================== */
 trackball_listener: trackball_listener {
     compatible = "zmk,input-listener";
     device = <&trackball>;
