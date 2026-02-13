@@ -2,6 +2,7 @@
 
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
+#include <dt-bindings/zmk/mouse-gesture.h>   // ← これ追加
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
