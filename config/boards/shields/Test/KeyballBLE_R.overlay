@@ -3,6 +3,7 @@
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>   /* ←これが無いとNRF_PSELで落ちる */
 
 /* col-offset */
 &default_transform {
@@ -21,9 +22,7 @@
 };
 
 / {
-    /* ===============================
-     * スクロール端数繰り越し（品質優先）
-     * =============================== */
+    /* スクロール端数繰り越し */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -34,12 +33,7 @@
         };
     };
 
-    /* ===============================
-     * トラックボール入力 → プロセッサ適用
-     *  - 動いた瞬間だけ layer 13 を 200ms ON
-     *  - その間だけ gesture を有効化
-     *  - wheel 端数繰り越しは常時
-     * =============================== */
+    /* トラックボール入力 → temp layer + gesture + rema */
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
@@ -52,27 +46,22 @@
     };
 };
 
-/* ===============================
- * ジェスチャ設定（わかりやすい定番）
- * =============================== */
+/* ジェスチャ（わかりやすい定番） */
 &zip_mouse_gesture {
     stroke-size = <150>;
     enable-eager-mode;
     idle-timeout-ms = <200>;
 
-    /* 上：Mission Control */
     mission_control {
         pattern = <GESTURE_UP>;
         bindings = <&kp LC(UP_ARROW)>;
     };
 
-    /* 下：App Exposé */
     app_expose {
         pattern = <GESTURE_DOWN>;
         bindings = <&kp LC(DOWN_ARROW)>;
     };
 
-    /* 左：戻る / 右：進む（ブラウザ系） */
     back {
         pattern = <GESTURE_LEFT>;
         bindings = <&kp LG(LBKT)>;
@@ -83,7 +72,6 @@
         bindings = <&kp LG(RBKT)>;
     };
 
-    /* 右→左：デスクトップ左 / 左→右：デスクトップ右 */
     desktop_left {
         pattern = <GESTURE_RIGHT GESTURE_LEFT>;
         bindings = <&kp LC(LEFT_ARROW)>;
@@ -139,8 +127,6 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-
-        /* スクロールレイヤー（あなたの現行維持） */
         scroll-layers = <5>;
     };
 };
