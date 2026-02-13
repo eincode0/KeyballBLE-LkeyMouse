@@ -1,6 +1,6 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 120    // default: 10
 
-/* zmk-mouse-gesture の on/off behavior */
+/* mouse-gesture activation key をSPACEにする版（全コピペ用 keymap） */
 
 #include <mouse-gesture.dtsi>
 #include <behaviors.dtsi>
@@ -147,7 +147,6 @@
             label = "ROTATE";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
-
             tap-ms = <20>;
         };
 
@@ -208,17 +207,6 @@
         };
     };
 
-    /* layer13 ON/OFF で mouse_gesture_on/off を実行（zmk-listeners） */
-
-    layer_listeners {
-        compatible = "zmk,layer-listeners";
-
-        mouse_gesture_toggle {
-            layers = <13>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -227,7 +215,7 @@
 &kp Q             &kp W         &kp E         &kp R         &kp T                                                   &kp Y           &kp U               &lt 5 I    &kp O       &mt RIGHT_SHIFT P
 &kp A             &kp S         &kp D         &kp F         &lt 6 G    &kt LEFT_SHIFT       &kp AT_SIGN             &kp H           &kp J               &kp K      &lt 4 L     &lt 2 MINUS
 &mt LEFT_SHIFT Z  &kp X         &kp C         &kp V         &kp B      &mkp MB1             &mt LEFT_CONTROL COLON  &mt LEFT_ALT N  &mt LEFT_COMMAND M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
-&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 13 SPACE  &lt 3 TAB  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                                &kp DELETE
+&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &mouse_gesture_kp 0 SPACE  &lt 3 TAB  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                                &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
@@ -364,8 +352,6 @@
 
             sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
         };
-
-        /* layer13（ジェスチャ専用）：全透過。sensor-bindings は書かない（←これが一番安全） */
 
         GESTURE {
             bindings = <
