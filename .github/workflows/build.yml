@@ -2,11 +2,4 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main      - name: Upload firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.shield }}
-          path: build/${{ matrix.shield }}/zephyr/*.uf2        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.shield }}
-          path: build/${{ matrix.shield }}/zephyr/*.uf2
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
