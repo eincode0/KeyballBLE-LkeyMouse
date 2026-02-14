@@ -376,10 +376,10 @@
 
         GESTURE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans             &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &mouse_gesture_on  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp A   &trans  &trans  &trans  &trans             &trans
-&trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                                     &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans              &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &mouse_gesture_off  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &kp A   &trans  &trans  &trans  &trans              &trans
+&trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                                      &trans
             >;
         };
     };
