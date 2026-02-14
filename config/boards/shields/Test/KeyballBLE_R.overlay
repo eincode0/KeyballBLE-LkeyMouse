@@ -18,6 +18,7 @@
 };
 
 / {
+    /* ===== スクロール端数繰り越し（WHEELだけを加工） ===== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -28,17 +29,20 @@
         };
     };
 
-    /* ===== トラックボール入力（通常） ===== */
+    /* ===== トラックボール入力 ===== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 通常：スクロール端数処理だけ */
+        /* 通常（layer13以外）：スクロール端数処理だけ */
         input-processors = <
             &tb_wheel_rema 1 1
         >;
 
-        /* layer13 の間は：gesture + 端数処理 */
+        /* layer13の間だけ：ジェスチャ→端数処理
+         *  - gesture は“生の動き”を見たいので先頭
+         *  - wheel_rema は最後（WHEELだけ整形）
+         */
         layer13 {
             layers = <13>;
             input-processors = <
@@ -84,7 +88,7 @@
     };
 };
 
-/* Studio/UART を使うなら無効化しない（DTトラブル回避） */
+/* Studio/UART を使う前提なら無効化しない（DTトラブル回避） */
 /* &xiao_serial { status = "disabled"; }; */
 
 &spi0 {
