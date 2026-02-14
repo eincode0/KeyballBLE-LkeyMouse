@@ -18,7 +18,6 @@
 };
 
 / {
-    /* ===== スクロール端数繰り越し ===== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -29,17 +28,17 @@
         };
     };
 
-    /* ===== トラックボール入力：通常はスクロール端数処理だけ ===== */
+    /* ===== トラックボール入力（通常） ===== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 通常（layer13以外） */
+        /* 通常：スクロール端数処理だけ */
         input-processors = <
             &tb_wheel_rema 1 1
         >;
 
-        /* layer13 のときだけ gesture を追加（= 常時ジェスチャ受付） */
+        /* layer13 の間は：gesture + 端数処理 */
         layer13 {
             layers = <13>;
             input-processors = <
@@ -50,12 +49,11 @@
     };
 };
 
-/* ===== ジェスチャ定義 ===== */
+/* ===== ジェスチャ定義（まずは出やすさ優先） ===== */
 &zip_mouse_gesture {
-    /* 誤爆減らしたいなら 200 推奨。まずは 120〜200 が扱いやすい */
-    stroke-size = <200>;
-    idle-timeout-ms = <500>;
-    /* enable-eager-mode; */ /* 誤爆するならOFF推奨 */
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
 
     mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
     app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
@@ -86,9 +84,8 @@
     };
 };
 
-/* （Studio/UARTを使うなら無効化しないのが安全）
- * &xiao_serial { status = "disabled"; };
- */
+/* Studio/UART を使うなら無効化しない（DTトラブル回避） */
+/* &xiao_serial { status = "disabled"; }; */
 
 &spi0 {
     status = "okay";
@@ -106,4 +103,4 @@
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         scroll-layers = <5>;
     };
-};    
+};
