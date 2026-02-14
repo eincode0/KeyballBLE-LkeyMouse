@@ -17,7 +17,10 @@
         ;
 };
 
-/ {
+ / {
+    /* ===============================
+     * スクロール品質向上（端数繰り越し）: 常時
+     * =============================== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -28,50 +31,156 @@
         };
     };
 
-    /* トラックボール入力 → gesture → 端数繰り越し
-       ※ gestureの有効/無効は mouse_gesture_on/off が握る */
+    /* ===============================
+     * レイヤー別 ジェスチャ processor（2/3/6/13/14）
+     *  - それぞれ「同じ4方向」でも中身を変えられる
+     * =============================== */
+       zip_mouse_gesture_l3: zip_mouse_gesture_l3 {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <60>;
+        idle-timeout-ms = <350>;
+        enable-eager-mode;
+
+        up    { pattern = <GESTURE_UP>;    bindings = <&kp C_MISSION_CONTROL>; }; /* F3相当 */
+        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(SPACE)>;        }; /* Spotlight */
+        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LBKT)>;         }; /* 戻る */
+        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(RBKT)>;         }; /* 進む */
+    };
+
+    zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <60>;
+        idle-timeout-ms = <350>;
+        enable-eager-mode;
+
+        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(F)>;        }; /* 検索 */
+        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LA(F))>;    }; /* 置換 */
+        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(T)>;        }; /* 新規タブ */
+        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>;        }; /* 閉じる */
+    };
+
+    zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <60>;
+        idle-timeout-ms = <350>;
+        enable-eager-mode;
+
+        up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;      }; /* 輝度UP */
+        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;      }; /* 輝度DN */
+        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; }; /* おすすめ */
+        right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;   }; /* おすすめ */
+    };
+
+    zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <60>;
+        idle-timeout-ms = <350>;
+        enable-eager-mode;
+
+        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; }; /* Copy */
+        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; }; /* Paste */
+        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(X)>; }; /* Cut */
+        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(S)>; }; /* Save */
+    };
+
+    zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
+        compatible = "zmk,input-processor-mouse-gesture";
+        #input-processor-cells = <0>;
+        stroke-size = <60>;
+        idle-timeout-ms = <350>;
+        enable-eager-mode;
+
+        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(M)>;      }; /* 最小化 */
+        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(Q)>;      }; /* 終了 */
+        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LC(F))>;  }; /* 最大化(フルスクリーン切替) */
+        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>;      }; /* おすすめ：隠す */
+    };
+
+    /* ===============================
+     * トラックボール入力リスナー
+     *  - base: tb_wheel_rema（常時）
+     *  - layer override: レイヤーごとのgestureを追加して process-next で base へ
+     * =============================== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <
-            &zip_mouse_gesture
-            &tb_wheel_rema 1 1
-        >;
+
+        /* base（常時） */
+        input-processors = <&tb_wheel_rema 1 1>;
+
+        /* overrides（レイヤー別） */
+        gesture_l3 {
+            layers = <3>;
+            input-processors = <&zip_mouse_gesture_l3>;
+            process-next;
+        };
+
+        gesture_l2 {
+            layers = <2>;
+            input-processors = <&zip_mouse_gesture_l2>;
+            process-next;
+        };
+
+        gesture_l13 {
+            layers = <13>;
+            input-processors = <&zip_mouse_gesture_l13>;
+            process-next;
+        };
+
+        gesture_l6 {
+            layers = <6>;
+            input-processors = <&zip_mouse_gesture_l6>;
+            process-next;
+        };
+
+        gesture_l14 {
+            layers = <14>;
+            input-processors = <&zip_mouse_gesture_l14>;
+            process-next;
+        };
     };
 
-    /* ★追加：layer13 入場で gesture ON / 退場で OFF（自動） */
-       layer_listeners {
+    /* ===============================
+     * 自動ON/OFF（レイヤー出入りで確実にOFFる）
+     *  - zmk-listeners が必要（あなたの west.yml に入れるやつ）
+     * =============================== */
+    layer_listeners {
         compatible = "zmk,layer-listeners";
 
-        gesture_layer13_auto {
-            layers = <13>;
+        gesture_auto_2_3_6_13_14 {
+            layers = <2 3 6 13 14>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
 };
 
-/* ジェスチャ定義（単発で出やすい設定） */
-&zip_mouse_gesture {
-    stroke-size = <60>;
-    idle-timeout-ms = <350>;
-    enable-eager-mode;
-
-    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
-    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
-    back            { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LBKT)>; };
-    forward         { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(RBKT)>; };
-};
-
 &pinctrl {
     spi0_default: spi0_default {
-        group1 { psels = <NRF_PSEL(SPIM_SCK, 0, 5) NRF_PSEL(SPIM_MOSI, 0, 4) NRF_PSEL(SPIM_MISO, 0, 4)>; };
+        group1 {
+            psels = <
+                NRF_PSEL(SPIM_SCK, 0, 5)
+                NRF_PSEL(SPIM_MOSI, 0, 4)
+                NRF_PSEL(SPIM_MISO, 0, 4)
+            >;
+        };
     };
     spi0_sleep: spi0_sleep {
-        group1 { psels = <NRF_PSEL(SPIM_SCK, 0, 5) NRF_PSEL(SPIM_MOSI, 0, 4) NRF_PSEL(SPIM_MISO, 0, 4)>; low-power-enable; };
+        group1 {
+            psels = <
+                NRF_PSEL(SPIM_SCK, 0, 5)
+                NRF_PSEL(SPIM_MOSI, 0, 4)
+                NRF_PSEL(SPIM_MISO, 0, 4)
+            >;
+            low-power-enable;
+        };
     };
 };
 
-/* ★ここは消す：Studio/UART snippet とぶつけてDT事故りやすい */
+/* ここは残さない（studio-rpc-usb-uart snippet と衝突しやすい） */
 /* &xiao_serial { status = "disabled"; }; */
 
 &spi0 {
