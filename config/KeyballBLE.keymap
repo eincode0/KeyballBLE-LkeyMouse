@@ -379,7 +379,7 @@
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &kp A   &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                          &mouse_gesture
+&trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                          &trans
             >;
         };
     };
