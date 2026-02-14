@@ -39,8 +39,8 @@
 };
 
 &zip_mouse_gesture {
-    stroke-size = <60>;
-    idle-timeout-ms = <350>;
+    stroke-size = <200>;
+    idle-timeout-ms = <500>;
     enable-eager-mode;
 
     mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
