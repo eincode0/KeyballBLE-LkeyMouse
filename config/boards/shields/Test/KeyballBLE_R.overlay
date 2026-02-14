@@ -17,10 +17,79 @@
         ;
 };
 
-/ {
-    /* ---------------------------
-     * スクロール端数繰り越し（常時）
-     * --------------------------- */
+/* ---------------------------
+ * gesture processors（ここはトップレベル）
+ * --------------------------- */
+
+/* layer3（いちばん使う想定） */
+&zip_mouse_gesture {
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
+    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
+    back            { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
+    forward         { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
+};
+
+zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(F)>;     };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LA(F))>; };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(T)>;     };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>;     };
+};
+
+zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Z)>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(P)>; };
+};
+
+zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;      };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;      };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;   };
+};
+
+zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(M)>;     };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(Q)>;     };
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(A)>;     };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>;     };
+};
+
+/* ---------------------------
+ * / { ... } は “リスナーや一般ノード” だけ
+ * --------------------------- */
+ / {
+    /* スクロール端数繰り越し（常時） */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -31,137 +100,41 @@
         };
     };
 
-    /* ---------------------------
-     * レイヤー別 mouse-gesture processor 定義
-     *  - “同じ4方向”でも中身を変えられる
-     * --------------------------- */
-
-    /* layer3（いちばん使う想定） */
-        &zip_mouse_gesture {
-    stroke-size = <60>;
-    idle-timeout-ms = <350>;
-    enable-eager-mode;
-
-    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
-    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
-
-    /* ★戻る/進むをMB4/MB5で出す */
-    back            { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
-    forward         { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
-};
-
-    zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <60>;
-        idle-timeout-ms = <350>;
-        enable-eager-mode;
-
-        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(F)>;        }; /* 検索 */
-        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LA(F))>;    }; /* 置換 */
-        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(T)>;        }; /* 新規タブ */
-        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>;        }; /* 閉じる */
-    };
-
-    zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <60>;
-        idle-timeout-ms = <350>;
-        enable-eager-mode;
-
-        up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;      }; /* 輝度UP */
-        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;      }; /* 輝度DN */
-        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; }; /* おすすめ */
-        right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;   }; /* おすすめ */
-    };
-
-    zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <60>;
-        idle-timeout-ms = <350>;
-        enable-eager-mode;
-
-        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; }; /* Copy */
-        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; }; /* Paste */
-        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(X)>; }; /* Cut */
-        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(S)>; }; /* Save */
-    };
-
-    zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <60>;
-        idle-timeout-ms = <350>;
-        enable-eager-mode;
-
-        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(M)>;      }; /* 最小化 */
-        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(Q)>;      }; /* 終了 */
-        up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LC(F))>;  }; /* 最大化(フルスクリーン切替) */
-        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>;      }; /* おすすめ：隠す */
-    };
-
-    /* ---------------------------
-     * トラックボール入力リスナー
-     *  - レイヤー別に processor を差し替える
-     *  - “上から評価”なので順番が大事
-     *  - 必要なら process-next を使う
-     * --------------------------- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* layer14 */
+        /* 通常：端数繰り越しのみ */
+        input-processors = <&tb_wheel_rema 1 1>;
+
+        /* layer14：gesture + 端数繰り越し */
         gesture_l14 {
             layers = <14>;
-            input-processors = <&zip_mouse_gesture_l14>;
-            process-next;
+            input-processors = <&zip_mouse_gesture_l14 &tb_wheel_rema 1 1>;
         };
 
         /* layer13 */
         gesture_l13 {
             layers = <13>;
-            input-processors = <&zip_mouse_gesture_l13>;
-            process-next;
+            input-processors = <&zip_mouse_gesture_l13 &tb_wheel_rema 1 1>;
         };
 
         /* layer6 */
         gesture_l6 {
             layers = <6>;
-            input-processors = <&zip_mouse_gesture_l6>;
-            process-next;
+            input-processors = <&zip_mouse_gesture_l6 &tb_wheel_rema 1 1>;
         };
 
-        /* layer3 */
+        /* layer3：ここは “&zip_mouse_gesture” を使う（上書きした本体） */
         gesture_l3 {
             layers = <3>;
-            input-processors = <&zip_mouse_gesture_l3>;
-            process-next;
+            input-processors = <&zip_mouse_gesture &tb_wheel_rema 1 1>;
         };
 
         /* layer2 */
         gesture_l2 {
             layers = <2>;
-            input-processors = <&zip_mouse_gesture_l2>;
-            process-next;
-        };
-
-        /* base（常時）：最後にスクロール端数繰り越し */
-        input-processors = <&tb_wheel_rema 1 1>;
-    };
-
-    /* ---------------------------
-     * 自動ON/OFF（確実にOFFる）
-     *  - zmk-listeners が必要
-     *  - 1つ目=入場でON、2つ目=退場でOFF
-     * --------------------------- */
-    layer_listeners {
-        compatible = "zmk,layer-listeners";
-
-        gesture_auto_2_3_6_13_14 {
-            layers = <2 3 6 13 14>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
+            input-processors = <&zip_mouse_gesture_l2 &tb_wheel_rema 1 1>;
         };
     };
 };
