@@ -1,10 +1,3 @@
-/* ===============================
- * KeyballBLE_R.overlay（全置き換え）
- *  - Trackball(PMW3610) + tb_wheel_rema（端数繰り越し）
- *  - レイヤー別 mouse-gesture（2/3/6/13/14）
- *  - 自動ON/OFF：入場でON、退場でOFF（zmk-listeners使用）
- * =============================== */
-
 #include "KeyballBLE.dtsi"
 
 #include <input/processors.dtsi>
@@ -24,9 +17,9 @@
         ;
 };
 
- / {
+/ {
     /* ---------------------------
-     * input processors（新規ノードは全部ここ）
+     * input processors
      * --------------------------- */
     input_processors {
         /* スクロール端数繰り越し（常時） */
@@ -52,7 +45,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>;           };
         };
 
-        /* layer3（今の割り当て維持） */
+        /* layer3（いまの割り当てのまま） */
         zip_mouse_gesture_l3: zip_mouse_gesture_l3 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -66,7 +59,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>;           };
         };
 
-        /* layer6（今の割り当て維持） */
+        /* layer6 */
         zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -80,7 +73,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(S)>; };
         };
 
-        /* layer13（今の割り当て維持） */
+        /* layer13 */
         zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -88,13 +81,13 @@
             idle-timeout-ms = <350>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;       };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;       };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;      };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;      };
             left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; };
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;   };
         };
 
-        /* layer14（今の割り当て維持） */
+        /* layer14 */
         zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -117,56 +110,20 @@
         device = <&trackball>;
 
         /* デフォルト（常時）：端数繰り越しだけ */
-        input-processors = <
-            &tb_wheel_rema 1 1
-        >;
+        input-processors = <&tb_wheel_rema 1 1>;
 
         /* 指定レイヤー時：gesture + 端数繰り越し */
-        gesture_l14 {
-            layers = <14>;
-            input-processors = <
-                &zip_mouse_gesture_l14
-                &tb_wheel_rema 1 1
-            >;
-        };
-
-        gesture_l13 {
-            layers = <13>;
-            input-processors = <
-                &zip_mouse_gesture_l13
-                &tb_wheel_rema 1 1
-            >;
-        };
-
-        gesture_l6 {
-            layers = <6>;
-            input-processors = <
-                &zip_mouse_gesture_l6
-                &tb_wheel_rema 1 1
-            >;
-        };
-
-        gesture_l3 {
-            layers = <3>;
-            input-processors = <
-                &zip_mouse_gesture_l3
-                &tb_wheel_rema 1 1
-            >;
-        };
-
-        gesture_l2 {
-            layers = <2>;
-            input-processors = <
-                &zip_mouse_gesture_l2
-                &tb_wheel_rema 1 1
-            >;
-        };
+        gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_wheel_rema 1 1>; };
+        gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_wheel_rema 1 1>; };
+        gesture_l6  { layers = <6>;  input-processors = <&zip_mouse_gesture_l6  &tb_wheel_rema 1 1>; };
+        gesture_l3  { layers = <3>;  input-processors = <&zip_mouse_gesture_l3  &tb_wheel_rema 1 1>; };
+        gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_wheel_rema 1 1>; };
     };
 
     /* ---------------------------
      * 自動ON/OFF（zmk-listeners 必須）
-     *  - 1つ目=入場でON
-     *  - 2つ目=退場でOFF（確実にOFFる）
+     *  - 対象レイヤーに入ったら ON
+     *  - 抜けたら OFF（ここが欲しかったやつ）
      * --------------------------- */
     layer_listeners {
         compatible = "zmk,layer-listeners";
@@ -181,8 +138,9 @@
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
+            /* ★カンマ禁止：< > の中をスペース区切り */
             psels = <
-                NRF_PSEL(SPIM_SCK,  0, 5)
+                NRF_PSEL(SPIM_SCK, 0, 5)
                 NRF_PSEL(SPIM_MOSI, 0, 4)
                 NRF_PSEL(SPIM_MISO, 0, 4)
             >;
@@ -192,7 +150,7 @@
     spi0_sleep: spi0_sleep {
         group1 {
             psels = <
-                NRF_PSEL(SPIM_SCK,  0, 5)
+                NRF_PSEL(SPIM_SCK, 0, 5)
                 NRF_PSEL(SPIM_MOSI, 0, 4)
                 NRF_PSEL(SPIM_MISO, 0, 4)
             >;
