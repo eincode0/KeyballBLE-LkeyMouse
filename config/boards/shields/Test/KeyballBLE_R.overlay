@@ -27,7 +27,7 @@
     idle-timeout-ms = <350>;
     enable-eager-mode;
 
-    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
+    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
     app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
     back            { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
     forward         { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
@@ -41,7 +41,7 @@ zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
     enable-eager-mode;
 
     up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(F)>;     };
-    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LA(F))>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp F3>;        };
     left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(T)>;     };
     right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>;     };
 };
