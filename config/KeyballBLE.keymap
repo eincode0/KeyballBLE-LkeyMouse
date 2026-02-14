@@ -22,8 +22,6 @@
 
 /* ===============================
  * mouse-gesture の hold-tap 必須設定（ビルド落ち対策）
- *  - mouse_gesture_kp / mouse_gesture_mkp は hold-tap なので
- *    tapping-term-ms が無いと DT 生成でコケる
  * =============================== */
 &mouse_gesture_kp {
     tapping-term-ms = <200>;
@@ -272,7 +270,7 @@
         MOUSE {
             bindings = <
 &mmv MOVE_LEFT       &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &kp LG(T)                                            &kp LG(Z)       &mkp MB5      &lt_mkp 5 MB4  &kp LG(A)  &kp LC(H)
-&msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &mo 11     &mkp MB3             &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1       &none      &lt 5 ENTER
+&msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &mo 11     &mkp MB3             &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1       &mo 13     &lt 5 ENTER
 &mt LEFT_SHIFT HOME  &kp END         &kp DOWN_ARROW  &kp UP_ARROW     &mkp MB2   &mkp MB1             &kp LG(C)            &kp LG(V)       &kp UP_ARROW  &drag_off      &kp LG(X)  &lt 5 BACKSPACE
 &kp LG(P)            &mkp MB5        &mkp MB4        &kp LEFT_ARROW   &kp TAB    &kp RIGHT_ARROW      &drag_on             &kp DOWN_ARROW                                          &trans
             >;
@@ -368,12 +366,17 @@
             sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
         };
 
+        /* ============================
+         * layer13: gesture enable layer
+         *  - MOUSEレイヤーの &mo 13 を押してる間だけ入る
+         *  - 右下の &mouse_gesture を押しながらボールを振る
+         * ============================ */
         GESTURE {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                          &mouse_gesture
             >;
         };
     };
