@@ -40,12 +40,12 @@
     };
 
     /* ★追加：layer13 入場で gesture ON / 退場で OFF（自動） */
-    layer_listeners {
+       layer_listeners {
         compatible = "zmk,layer-listeners";
 
         gesture_layer13_auto {
             layers = <13>;
-            bindings = <&mouse_gesture>;
+            bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
 };
