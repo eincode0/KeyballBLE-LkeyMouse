@@ -45,7 +45,7 @@
 
         gesture_layer13_auto {
             layers = <13>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
+            bindings = <&mouse_gesture>;
         };
     };
 };
