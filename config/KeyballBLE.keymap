@@ -227,10 +227,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R   &kp T                                                   &kp Y           &kp U               &lt 5 I    &kp O       &mt RIGHT_SHIFT P
-&kp A             &kp S         &kp D         &kp F   &lt 6 G    &kt LEFT_SHIFT       &kp AT_SIGN             &kp H           &kp J               &kp K      &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V   &kp B      &mkp MB1             &mt LEFT_CONTROL COLON  &mt LEFT_ALT N  &mt LEFT_COMMAND M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
-&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &mo 13  &lt 3 TAB  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                                &kp DELETE
+&kp Q             &kp W         &kp E         &kp R         &kp T                                                   &kp Y           &kp U               &lt 5 I    &kp O       &mt RIGHT_SHIFT P
+&kp A             &kp S         &kp D         &kp F         &lt 6 G    &kt LEFT_SHIFT       &kp AT_SIGN             &kp H           &kp J               &kp K      &lt 4 L     &lt 2 MINUS
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V         &kp B      &mkp MB1             &mt LEFT_CONTROL COLON  &mt LEFT_ALT N  &mt LEFT_COMMAND M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
+&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 13 SPACE  &lt 3 TAB  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                                &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
@@ -378,7 +378,7 @@
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans              &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &mouse_gesture_off  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &kp A   &trans  &trans  &trans  &trans              &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans              &trans
 &trans  &trans  &trans  &to 0   &trans  &trans      &trans  &trans                                      &trans
             >;
         };
