@@ -69,11 +69,10 @@ zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
     idle-timeout-ms = <350>;
     enable-eager-mode;
 
-    up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>; };
-    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>; };
-    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; };
-    right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>; };
-};
+up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
+down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
+left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
+right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
 
 /* layer14 */
 zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
