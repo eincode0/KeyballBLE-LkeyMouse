@@ -18,3 +18,14 @@
 &sensors {
     status = "okay";
 };
+
+/* ZMK Studio snippet (studio-rpc-usb-uart) が追加する uart0_* が
+ * Zephyr側で “#binding-cells が無い” と言われて落ちる対策
+ */
+&uart0_default {
+    #binding-cells = <0>;
+};
+
+&uart0_sleep {
+    #binding-cells = <0>;
+};
