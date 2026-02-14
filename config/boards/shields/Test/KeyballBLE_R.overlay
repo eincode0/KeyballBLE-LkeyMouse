@@ -3,10 +3,7 @@
 #include <input/processors.dtsi>
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/mouse.h>        /* ★MB4/MB5 これが無いと落ちる */
-#include <dt-bindings/zmk/consumer.h>     /* 念のため（輝度/音量） */
 
 &default_transform { col-offset = <6>; };
 
@@ -20,48 +17,10 @@
         ;
 };
 
-&xiao_serial { status = "disabled"; };
-
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)
-                     NRF_PSEL(SPIM_MOSI, 0, 4)
-                     NRF_PSEL(SPIM_MISO, 0, 4)>;
-        };
-    };
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 5)
-                     NRF_PSEL(SPIM_MOSI, 0, 4)
-                     NRF_PSEL(SPIM_MISO, 0, 4)>;
-            low-power-enable;
-        };
-    };
-};
-
-&spi0 {
-    status = "okay";
-    compatible = "nordic,nrf-spim";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
-
-    trackball: trackball@0 {
-        status = "okay";
-        compatible = "pixart,pmw3610";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        scroll-layers = <5>;
-    };
-};
-
 / {
-    /* ---------------------------
+    /* ===============================
      * input processors
-     * --------------------------- */
+     * =============================== */
     input_processors {
         /* スクロール端数繰り越し（常時） */
         tb_wheel_rema: tb_wheel_rema {
@@ -128,7 +87,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;    };
         };
 
-        /* layer14 */
+        /* layer14（未使用なら後で消せる） */
         zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -143,14 +102,16 @@
         };
     };
 
-    /* ---------------------------
-     * trackball listener（レイヤーで差し替え）
-     * --------------------------- */
+    /* ===============================
+     * トラックボール入力（レイヤーで processor 差し替え）
+     *  - ここで gesture processor を使い分ける
+     *  - 最後に tb_wheel_rema を必ず通す（scroll品質）
+     * =============================== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* デフォルト：端数繰り越しだけ */
+        /* デフォルト（常時）：端数繰り越しだけ */
         input-processors = <&tb_wheel_rema 1 1>;
 
         /* 指定レイヤー時：gesture + 端数繰り越し */
@@ -161,10 +122,11 @@
         gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_wheel_rema 1 1>; };
     };
 
-    /* ---------------------------
+    /* ===============================
      * 自動ON/OFF（zmk-listeners）
-     * 入場でON / 退場でOFF（念のためOFFも確実に）
-     * --------------------------- */
+     *  - 入場でON / 退場でOFF
+     *  - “オフだけは欲しい” → これで確実に戻す
+     * =============================== */
     layer_listeners {
         compatible = "zmk,layer-listeners";
 
@@ -172,5 +134,45 @@
             layers = <2 3 6 13 14>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
+    };
+};
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            /* ★ここ：カンマ無しで並べる */
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)
+                     NRF_PSEL(SPIM_MOSI, 0, 4)
+                     NRF_PSEL(SPIM_MISO, 0, 4)>;
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)
+                     NRF_PSEL(SPIM_MOSI, 0, 4)
+                     NRF_PSEL(SPIM_MISO, 0, 4)>;
+            low-power-enable;
+        };
+    };
+};
+
+&xiao_serial { status = "disabled"; };
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
+
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        scroll-layers = <5>;
     };
 };
