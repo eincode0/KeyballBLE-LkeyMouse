@@ -196,7 +196,7 @@
             bindings = <
 &kp Q             &kp W         &kp E         &kp R        &kp T                                                  &kp Y           &kp U               &lt 5 I    &kp O       &mt RIGHT_SHIFT P
 &kp A             &kp S         &kp D         &kp F        &lt 6 G   &kt LEFT_SHIFT       &kp AT_SIGN             &kp H           &kp J               &kp K      &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &lt 13 TAB           &mt LEFT_CONTROL COLON  &mt LEFT_ALT N  &mt LEFT_COMMAND M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
+&mt LEFT_SHIFT Z  &kp X         &kp C         &lt 14 V     &kp B     &lt 13 TAB           &mt LEFT_CONTROL COLON  &mt LEFT_ALT N  &mt LEFT_COMMAND M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
 &kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                                &kp DELETE
             >;
 
