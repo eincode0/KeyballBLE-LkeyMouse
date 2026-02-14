@@ -6,6 +6,10 @@ manifest:
       url-base: https://github.com/Dist16384
     - name: eincode0
       url-base: https://github.com/eincode0
+
+    # 追加
+    - name: ssbb
+      url-base: https://github.com/ssbb
     - name: kot149
       url-base: https://github.com/kot149
 
@@ -19,6 +23,13 @@ manifest:
       remote: Dist16384
       revision: main
 
+    # 追加: layer on/off で behavior 実行
+    - name: zmk-listeners
+      remote: ssbb
+      revision: v1
+      path: modules/zmk-listeners
+
+    # 追加: マウスジェスチャ
     - name: zmk-mouse-gesture
       remote: kot149
       revision: v1
