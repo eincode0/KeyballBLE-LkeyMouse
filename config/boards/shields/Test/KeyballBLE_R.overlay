@@ -4,7 +4,6 @@
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/consumer.h>
 
 &default_transform { col-offset = <6>; };
 
@@ -18,24 +17,84 @@
         ;
 };
 
-/* L3（ベース）: 既存 zip_mouse_gesture を上書き */
+/* =================================================
+ * gesture processors（トップレベル定義）
+ * ================================================= */
+
+/* layer3（メイン） */
 &zip_mouse_gesture {
     stroke-size = <60>;
     idle-timeout-ms = <350>;
     enable-eager-mode;
 
-    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
-    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
+    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LCTRL UP_ARROW>; };
+    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LCTRL DOWN_ARROW>; };
     back            { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
     forward         { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
 };
 
+/* layer2 */
+zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LGUI F>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp F3>; };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LGUI T>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LGUI W>; };
+};
+
+/* layer6 */
+zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LGUI C>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LGUI V>; };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LGUI Z>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LGUI P>; };
+};
+
+/* layer13 */
+zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>; };
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>; };
+};
+
+/* layer14 */
+zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
+    compatible = "zmk,input-processor-mouse-gesture";
+    #input-processor-cells = <0>;
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LGUI M>; };
+    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LGUI Q>; };
+    up    { pattern = <GESTURE_UP>;    bindings = <&kp LGUI A>; };
+    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LGUI H>; };
+};
+
+/* =================================================
+ * listener
+ * ================================================= */
+
  / {
-    /* ---------------------------
-     * input processors
-     * --------------------------- */
     input_processors {
-        /* スクロール端数繰り越し（常時） */
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
             #input-processor-cells = <2>;
@@ -43,72 +102,13 @@
             codes = <INPUT_REL_WHEEL>;
             track-remainders;
         };
-
-        /* L2 */
-        zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(F)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp F3>;    };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(T)>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>; };
-        };
-
-        /* L6 */
-        zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Z)>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(P)>; };
-        };
-
-        /* L13 */
-        zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp C_BRI_UP>;      };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_BRI_DN>;      };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_VOLUME_DOWN>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_VOLUME_UP>;   };
-        };
-
-        /* L14 */
-        zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
-            enable-eager-mode;
-
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(M)>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(Q)>; };
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(A)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>; };
-        };
     };
 
-    /* ---------------------------
-     * trackball listener（レイヤー別差し替え）
-     * --------------------------- */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        /* 通常：端数繰り越しのみ */
+        /* 通常 */
         input-processors = <&tb_wheel_rema 1 1>;
 
         gesture_l14 {
@@ -136,18 +136,6 @@
             input-processors = <&zip_mouse_gesture_l2 &tb_wheel_rema 1 1>;
         };
     };
-
-    /* ---------------------------
-     * 自動ON/OFF（zmk-listeners）
-     * --------------------------- */
-    layer_listeners {
-        compatible = "zmk,layer-listeners";
-
-        gesture_auto_2_3_6_13_14 {
-            layers = <2 3 6 13 14>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-    };
 };
 
 &pinctrl {
@@ -172,8 +160,6 @@
         };
     };
 };
-
-&xiao_serial { status = "disabled"; };
 
 &spi0 {
     status = "okay";
