@@ -35,18 +35,19 @@
      * レイヤー別 ジェスチャ processor（2/3/6/13/14）
      *  - それぞれ「同じ4方向」でも中身を変えられる
      * =============================== */
-       zip_mouse_gesture_l3: zip_mouse_gesture_l3 {
-        compatible = "zmk,input-processor-mouse-gesture";
-        #input-processor-cells = <0>;
-        stroke-size = <60>;
-        idle-timeout-ms = <350>;
-        enable-eager-mode;
 
-        up    { pattern = <GESTURE_UP>;    bindings = <&kp C_MISSION_CONTROL>; }; /* F3相当 */
-        down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(SPACE)>;        }; /* Spotlight */
-        left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LBKT)>;         }; /* 戻る */
-        right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(RBKT)>;         }; /* 進む */
-    };
+       &zip_mouse_gesture {
+    stroke-size = <60>;
+    idle-timeout-ms = <350>;
+    enable-eager-mode;
+
+    mission_control { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
+    app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
+
+    /* ★戻る/進むをMB4/MB5で出す */
+    back            { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
+    forward         { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
+};
 
     zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
         compatible = "zmk,input-processor-mouse-gesture";
