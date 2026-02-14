@@ -18,6 +18,7 @@
 };
 
 / {
+    /* ===== スクロール端数繰り越し ===== */
     input_processors {
         tb_wheel_rema: tb_wheel_rema {
             compatible = "zmk,input-processor-scaler";
@@ -28,20 +29,33 @@
         };
     };
 
+    /* ===== トラックボール入力：通常はスクロール端数処理だけ ===== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        /* 通常（layer13以外） */
         input-processors = <
-            &zip_mouse_gesture
             &tb_wheel_rema 1 1
         >;
+
+        /* layer13 のときだけ gesture を追加（= 常時ジェスチャ受付） */
+        layer13 {
+            layers = <13>;
+            input-processors = <
+                &zip_mouse_gesture
+                &tb_wheel_rema 1 1
+            >;
+        };
     };
 };
 
+/* ===== ジェスチャ定義 ===== */
 &zip_mouse_gesture {
+    /* 誤爆減らしたいなら 200 推奨。まずは 120〜200 が扱いやすい */
     stroke-size = <200>;
     idle-timeout-ms = <500>;
-    enable-eager-mode;
+    /* enable-eager-mode; */ /* 誤爆するならOFF推奨 */
 
     mission_control { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
     app_expose      { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
@@ -51,15 +65,30 @@
 
 &pinctrl {
     spi0_default: spi0_default {
-        group1 { psels = <NRF_PSEL(SPIM_SCK, 0, 5) NRF_PSEL(SPIM_MOSI, 0, 4) NRF_PSEL(SPIM_MISO, 0, 4)>; };
+        group1 {
+            psels = <
+                NRF_PSEL(SPIM_SCK, 0, 5)
+                NRF_PSEL(SPIM_MOSI, 0, 4)
+                NRF_PSEL(SPIM_MISO, 0, 4)
+            >;
+        };
     };
+
     spi0_sleep: spi0_sleep {
-        group1 { psels = <NRF_PSEL(SPIM_SCK, 0, 5) NRF_PSEL(SPIM_MOSI, 0, 4) NRF_PSEL(SPIM_MISO, 0, 4)>; low-power-enable; };
+        group1 {
+            psels = <
+                NRF_PSEL(SPIM_SCK, 0, 5)
+                NRF_PSEL(SPIM_MOSI, 0, 4)
+                NRF_PSEL(SPIM_MISO, 0, 4)
+            >;
+            low-power-enable;
+        };
     };
 };
 
-/* ここがDT破綻の原因になりやすいので消す */
-// &xiao_serial { status = "disabled"; };
+/* （Studio/UARTを使うなら無効化しないのが安全）
+ * &xiao_serial { status = "disabled"; };
+ */
 
 &spi0 {
     status = "okay";
@@ -77,4 +106,4 @@
         irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         scroll-layers = <5>;
     };
-};
+};    
