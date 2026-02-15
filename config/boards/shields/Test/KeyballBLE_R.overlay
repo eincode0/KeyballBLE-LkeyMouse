@@ -50,8 +50,8 @@
         zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
+            stroke-size = <50>;
+            idle-timeout-ms = <200>;
             enable-eager-mode;
 
             up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
