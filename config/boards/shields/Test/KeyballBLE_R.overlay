@@ -42,8 +42,8 @@
             gesture-cooldown-ms = <300>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(N)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(SPACE)>;   };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(N)>; };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(SPACE)>;   };
             left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Q)>;     };
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>;     };
         };
