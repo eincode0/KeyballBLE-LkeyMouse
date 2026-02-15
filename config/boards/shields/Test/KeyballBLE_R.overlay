@@ -36,8 +36,10 @@
         zip_mouse_gesture_l1: zip_mouse_gesture_l1 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
-            idle-timeout-ms = <350>;
+            stroke-size = <80>;
+            movement-threshold = <10>;
+            idle-timeout-ms = <150>;
+            gesture-cooldown-ms = <300>;
             enable-eager-mode;
 
             up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(SPACE)>; };
