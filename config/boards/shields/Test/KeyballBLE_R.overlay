@@ -19,6 +19,9 @@
 };
 
 / {
+    /* ===============================
+     * input processors
+     * =============================== */
     input_processors {
         /* スクロール端数繰り越し（常時） */
         tb_wheel_rema: tb_wheel_rema {
@@ -29,21 +32,27 @@
             track-remainders;
         };
 
-        /* ====== ジェスチャ中：カーソル移動を捨てる（REL_X/REL_Y を無視）====== */
+        /* ★ジェスチャ中だけカーソル(X/Y)を止める（REL_X/REL_Y を 0倍） */
         tb_drop_xy: tb_drop_xy {
-            compatible = "zmk,input-processor-filter";
-            #input-processor-cells = <0>;
+            compatible = "zmk,input-processor-scaler";
+            #input-processor-cells = <2>;
             type = <INPUT_EV_REL>;
             codes = <INPUT_REL_X INPUT_REL_Y>;
-            /* filter は “指定コードを落とす” 実装の想定 */
         };
 
-        /* ===== 共通 Quick 推奨 ===== */
-        /* A : layer1 */
+        /* ===== 共通：クイック推奨パラメータ =====
+         * stroke-size         : 70  （小さめで反応速い）
+         * movement-threshold  : 8   （ブレ誤爆を抑えつつ速い）
+         * idle-timeout-ms     : 120 （間を空けずに決まりやすい）
+         * cooldown-ms         : 220 （連続誤爆を抑える）
+         * eager-mode          : 早め確定
+         */
+
+        /* ===== A : アプリ操作 (layer 1) ===== */
         zip_mouse_gesture_l1: zip_mouse_gesture_l1 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -55,11 +64,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>; };
         };
 
-        /* D : layer2 */
+        /* ===== D : デスクトップ (layer 2) ===== */
         zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -71,11 +80,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp F14>; };
         };
 
-        /* W : layer3 */
+        /* ===== W : ウィンドウ (layer 3) ===== */
         zip_mouse_gesture_l3: zip_mouse_gesture_l3 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -87,11 +96,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp F1>; };
         };
 
-        /* B : layer6 */
+        /* ===== B : ブラウザ (layer 6) ===== */
         zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -103,11 +112,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
         };
 
-        /* S : layer13 */
+        /* ===== S : スクショ (layer 13) ===== */
         zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -119,11 +128,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(LS(NUMBER_5))>; };
         };
 
-        /* M : layer14 */
+        /* ===== M : メディア (layer 14) ===== */
         zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
-            stroke-size = <60>;
+            stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
             gesture-cooldown-ms = <220>;
@@ -136,33 +145,26 @@
         };
     };
 
-    /* ==========================================================
-     * 1) 通常ポインタ（常時）：カーソル移動はここで生かす
-     * ========================================================== */
-    trackball_pointer: trackball_pointer {
+    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        /* デフォルト（常時）：端数繰り越しだけ */
         input-processors = <&tb_wheel_rema 1 1>;
+
+        /* 指定レイヤー時：gesture → XY停止 → 端数繰り越し */
+        gesture_l1  { layers = <1>;  input-processors = <&zip_mouse_gesture_l1  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l3  { layers = <3>;  input-processors = <&zip_mouse_gesture_l3  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l6  { layers = <6>;  input-processors = <&zip_mouse_gesture_l6  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
     };
 
-    /* ==========================================================
-     * 2) ジェスチャ（指定レイヤーのみ）
-     *    - 先頭で REL_X/REL_Y を捨てる → カーソルが動きにくくなる
-     * ========================================================== */
-    trackball_gesture: trackball_gesture {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-        gesture_l1  { layers = <1>;  input-processors = <&tb_drop_xy &zip_mouse_gesture_l1  &tb_wheel_rema 1 1>; };
-        gesture_l2  { layers = <2>;  input-processors = <&tb_drop_xy &zip_mouse_gesture_l2  &tb_wheel_rema 1 1>; };
-        gesture_l3  { layers = <3>;  input-processors = <&tb_drop_xy &zip_mouse_gesture_l3  &tb_wheel_rema 1 1>; };
-        gesture_l6  { layers = <6>;  input-processors = <&tb_drop_xy &zip_mouse_gesture_l6  &tb_wheel_rema 1 1>; };
-        gesture_l13 { layers = <13>; input-processors = <&tb_drop_xy &zip_mouse_gesture_l13 &tb_wheel_rema 1 1>; };
-        gesture_l14 { layers = <14>; input-processors = <&tb_drop_xy &zip_mouse_gesture_l14 &tb_wheel_rema 1 1>; };
-    };
-
+    /* 自動ON/OFF（入場でON / 退場でOFF） */
     layer_listeners {
         compatible = "zmk,layer-listeners";
+
         gesture_auto {
             layers = <1 2 3 6 13 14>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
