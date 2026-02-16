@@ -205,8 +205,8 @@
         gesture_l7  { layers = <7>;  input-processors = <&zip_mouse_gesture_l7  &tb_drop_all 0 1>; };
         gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_all 0 1>; };
         gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_all 0 1>; };
-        gesture_l11 { layers = <11>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_all 0 1>; };
-        gesture_l12 { layers = <12>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_all 0 1>; };
+        gesture_l11 { layers = <11>; input-processors = <&zip_mouse_gesture_l11 &tb_drop_all 0 1>; };
+        gesture_l12 { layers = <12>; input-processors = <&zip_mouse_gesture_l12 &tb_drop_all 0 1>; };
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
