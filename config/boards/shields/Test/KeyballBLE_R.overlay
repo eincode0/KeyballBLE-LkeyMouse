@@ -106,10 +106,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(R)>; };   /* Reload */
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(L)>; };   /* Address bar */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };    /* Back */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };    /* Forward */
         };
 
         /* ===== S : スクショ (layer 13) ===== */
