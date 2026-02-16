@@ -143,10 +143,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(LS(NUMBER_3))>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(LS(NUMBER_4))>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(NUMBER_5))>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(LS(NUMBER_5))>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(NUMBER_3))>; };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LS(NUMBER_4))>; };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(NUMBER_5))>; };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(NUMBER_5))>; };
         };
 
         /* ===== M : メディア (layer 14) ===== */
@@ -213,8 +213,8 @@
 
             up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(A)>; };          /* Select All */
             down  { pattern = <GESTURE_DOWN>;  bindings = <&kp ESC>; };            /* 選択解除 */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LA(LS(LEFT))>; };   /* 単語選択← */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LA(LS(RIGHT))>; };  /* 単語選択→ */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LA(LS(LEFT_ARROW))>; };   /* 単語選択← */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LA(LS(RIGHT_ARROW))>; };  /* 単語選択→ */
         };
     };
 
