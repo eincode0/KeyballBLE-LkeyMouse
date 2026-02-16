@@ -1,3 +1,10 @@
+/* ===============================
+ * KeyballBLE_R.overlay（全置き換え / 展開版）
+ *  - tb_wheel_rema : 常時スクロール端数繰り越し
+ *  - tb_drop_all   : ジェスチャ中は REL_X/Y/WHEEL/HWHEEL を 0倍（完全停止）
+ *  - 各レイヤーで mouse-gesture を切替
+ * =============================== */
+
 #include "KeyballBLE.dtsi"
 
 #include <input/processors.dtsi>
@@ -40,18 +47,11 @@
             codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>;
         };
 
-        /* ===== 共通：クイック推奨パラメータ =====
-         * stroke-size         : 70
-         * movement-threshold  : 8
-         * idle-timeout-ms     : 120
-         * cooldown-ms         : 220（タブ/カーソルは 180）
-         * eager-mode          : 早め確定
-         */
-
         /* ===== A : アプリ操作 (layer 1) ===== */
         zip_mouse_gesture_l1: zip_mouse_gesture_l1 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -68,6 +68,7 @@
         zip_mouse_gesture_l2: zip_mouse_gesture_l2 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -84,6 +85,7 @@
         zip_mouse_gesture_l3: zip_mouse_gesture_l3 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -100,6 +102,7 @@
         zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -112,10 +115,28 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };    /* Forward */
         };
 
+        /* ===== T : タブ操作 (layer 7) ===== */
+        zip_mouse_gesture_l7: zip_mouse_gesture_l7 {
+            compatible = "zmk,input-processor-mouse-gesture";
+            #input-processor-cells = <0>;
+
+            stroke-size = <70>;
+            movement-threshold = <8>;
+            idle-timeout-ms = <120>;
+            gesture-cooldown-ms = <180>;
+            enable-eager-mode;
+
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>;        }; /* 新規タブ */
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>;        }; /* タブを閉じる */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(TAB))>;  }; /* 前のタブ */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(TAB)>;      }; /* 次のタブ */
+        };
+
         /* ===== S : スクショ (layer 13) ===== */
         zip_mouse_gesture_l13: zip_mouse_gesture_l13 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -132,6 +153,7 @@
         zip_mouse_gesture_l14: zip_mouse_gesture_l14 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -144,26 +166,11 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_BRI_UP>; };
         };
 
-        /* ===== T : タブ操作 (layer 7) ===== */
-        zip_mouse_gesture_l7: zip_mouse_gesture_l7 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-            stroke-size = <70>;
-            movement-threshold = <8>;
-            idle-timeout-ms = <120>;
-            gesture-cooldown-ms = <180>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>;        }; /* 新規タブ */
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>;        }; /* タブを閉じる */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(TAB))>;  }; /* 前のタブ */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(TAB)>;      }; /* 次のタブ */
-        };
-
         /* ===== C : カーソル (layer 15) ===== */
         zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -180,6 +187,7 @@
         zip_mouse_gesture_l16: zip_mouse_gesture_l16 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -196,6 +204,7 @@
         zip_mouse_gesture_l17: zip_mouse_gesture_l17 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
+
             stroke-size = <70>;
             movement-threshold = <8>;
             idle-timeout-ms = <120>;
@@ -209,6 +218,9 @@
         };
     };
 
+    /* ===============================
+     * trackball listener
+     * =============================== */
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
@@ -216,7 +228,11 @@
         /* デフォルト（常時）：端数繰り越しだけ */
         input-processors = <&tb_wheel_rema 1 1>;
 
-        /* 指定レイヤー時：gesture → 完全停止 →（※スクロールも止めるので rema は付けない） */
+        /*
+         * 指定レイヤー時：
+         *   gesture が先に REL_X/Y を見て判定
+         *   その後 tb_drop_all が REL_* 出力を 0倍にして「完全停止」
+         */
         gesture_l1  { layers = <1>;  input-processors = <&zip_mouse_gesture_l1  &tb_drop_all 0 1>; };
         gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_drop_all 0 1>; };
         gesture_l3  { layers = <3>;  input-processors = <&zip_mouse_gesture_l3  &tb_drop_all 0 1>; };
@@ -240,6 +256,9 @@
     };
 };
 
+/* ===============================
+ * PMW3610 SPI
+ * =============================== */
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
