@@ -143,10 +143,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(NUMBER_3))>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LS(NUMBER_4))>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(NUMBER_5))>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(NUMBER_5))>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(KP_NUMBER_3))>; };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LS(KP_NUMBER_4))>; };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(KP_NUMBER_5))>; };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(KP_NUMBER_5))>; };
         };
 
         /* ===== M : メディア (layer 14) ===== */
