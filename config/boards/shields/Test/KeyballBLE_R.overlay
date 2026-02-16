@@ -183,7 +183,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp RIGHT_ARROW>; };
         };
 
-        /* ===== E : Edit (layer 16) ===== */
+        /* ===== E : Edit (layer 11) ===== */
         zip_mouse_gesture_l16: zip_mouse_gesture_l16 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -200,7 +200,7 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(Z))>; };     /* Redo */
         };
 
-        /* ===== R : Range (layer 17) ===== */
+        /* ===== R : Range (layer 12) ===== */
         zip_mouse_gesture_l17: zip_mouse_gesture_l17 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
@@ -241,8 +241,8 @@
         gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_all 0 1>; };
         gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_all 0 1>; };
         gesture_l15 { layers = <15>; input-processors = <&zip_mouse_gesture_l15 &tb_drop_all 0 1>; };
-        gesture_l16 { layers = <16>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_all 0 1>; };
-        gesture_l17 { layers = <17>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_all 0 1>; };
+        gesture_l16 { layers = <11>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_all 0 1>; };
+        gesture_l17 { layers = <12>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_all 0 1>; };
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
@@ -250,7 +250,7 @@
         compatible = "zmk,layer-listeners";
 
         gesture_auto {
-            layers = <1 2 3 6 7 13 14 15 16 17>;
+            layers = <1 2 3 6 7 13 14 15 11 12>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
