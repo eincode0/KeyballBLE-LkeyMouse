@@ -143,37 +143,68 @@
             left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_BRI_DN>; };
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_BRI_UP>; };
         };
-/* ===== T : タブ操作 (layer 7) ===== */
-zip_mouse_gesture_l7: zip_mouse_gesture_l7 {
-    compatible = "zmk,input-processor-mouse-gesture";
-    #input-processor-cells = <0>;
-    stroke-size = <70>;
-    movement-threshold = <8>;
-    idle-timeout-ms = <120>;
-    gesture-cooldown-ms = <180>;
-    enable-eager-mode;
+        /* ===== T : タブ操作 (layer 7) ===== */
+        zip_mouse_gesture_l7: zip_mouse_gesture_l7 {
+            compatible = "zmk,input-processor-mouse-gesture";
+            #input-processor-cells = <0>;
+            stroke-size = <70>;
+            movement-threshold = <8>;
+            idle-timeout-ms = <120>;
+            gesture-cooldown-ms = <180>;
+            enable-eager-mode;
 
-    up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>;        }; /* 新規タブ */
-    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>;        }; /* タブを閉じる */
-    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(TAB))>;  }; /* 前のタブ */
-    right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(TAB)>;      }; /* 次のタブ */
-};
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>;        }; /* 新規タブ */
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>;        }; /* タブを閉じる */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(TAB))>;  }; /* 前のタブ */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(TAB)>;      }; /* 次のタブ */
+        };
+        
+        /* ===== C : カーソル (layer 15) ===== */
+        zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
+            compatible = "zmk,input-processor-mouse-gesture";
+            #input-processor-cells = <0>;
+            stroke-size = <70>;
+            movement-threshold = <8>;
+            idle-timeout-ms = <120>;
+            gesture-cooldown-ms = <180>;
+            enable-eager-mode;
+        
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp UP_ARROW>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp DOWN_ARROW>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LEFT_ARROW>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp RIGHT_ARROW>; };
+        };
+        /* ===== E : Edit (layer 16) ===== */
+        zip_mouse_gesture_l16: zip_mouse_gesture_l16 {
+            compatible = "zmk,input-processor-mouse-gesture";
+            #input-processor-cells = <0>;
+            stroke-size = <70>;
+            movement-threshold = <8>;
+            idle-timeout-ms = <120>;
+            gesture-cooldown-ms = <220>;
+            enable-eager-mode;
 
-/* ===== C : カーソル (layer 15) ===== */
-zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
-    compatible = "zmk,input-processor-mouse-gesture";
-    #input-processor-cells = <0>;
-    stroke-size = <70>;
-    movement-threshold = <8>;
-    idle-timeout-ms = <120>;
-    gesture-cooldown-ms = <180>;
-    enable-eager-mode;
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; };  /* Copy */
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; };  /* Paste */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Z)>; };  /* Undo */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(Z))>; }; /* Redo */
+        };
 
-    up    { pattern = <GESTURE_UP>;    bindings = <&kp UP_ARROW>;    };
-    down  { pattern = <GESTURE_DOWN>;  bindings = <&kp DOWN_ARROW>;  };
-    left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LEFT_ARROW>;  };
-    right { pattern = <GESTURE_RIGHT>; bindings = <&kp RIGHT_ARROW>; };
-};
+        /* ===== R : Range (layer 17) ===== */
+        zip_mouse_gesture_l17: zip_mouse_gesture_l17 {
+            compatible = "zmk,input-processor-mouse-gesture";
+            #input-processor-cells = <0>;
+            stroke-size = <70>;
+            movement-threshold = <8>;
+            idle-timeout-ms = <120>;
+            gesture-cooldown-ms = <220>;
+            enable-eager-mode;
+
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(A)>; };        /* Select All */
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp ESC>; };          /* 選択解除(ESC) */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LA(LS(LEFT))>; }; /* 単語単位で選択← */
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LA(LS(RIGHT))>; };/* 単語単位で選択→ */
+        };
     };
 
     trackball_listener: trackball_listener {
@@ -190,8 +221,10 @@ zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
         gesture_l6  { layers = <6>;  input-processors = <&zip_mouse_gesture_l6  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
         gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
         gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
-        gesture_l7  { layers = <7>;  input-processors = <&zip_mouse_gesture_l7  &tb_wheel_rema 1 1>; };
-        gesture_l15 { layers = <15>; input-processors = <&zip_mouse_gesture_l15 &tb_wheel_rema 1 1>; };
+        gesture_l7  { layers = <7>;  input-processors = <&zip_mouse_gesture_l7  &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l15 { layers = <15>; input-processors = <&zip_mouse_gesture_l15 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l16 { layers = <16>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
+        gesture_l17 { layers = <17>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_xy 0 1 &tb_wheel_rema 1 1>; };
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
@@ -199,7 +232,7 @@ zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
         compatible = "zmk,layer-listeners";
 
         gesture_auto {
-            layers = <1 2 3 6 7 13 14 15>;
+                layers = <1 2 3 6 7 13 14 15 16 17>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
