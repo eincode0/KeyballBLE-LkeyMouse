@@ -58,10 +58,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(N)>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(B)>; };
             down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(SPACE)>; };
             left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Q)>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(B)>; };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>; };
         };
 
         /* ===== D : デスクトップ (layer 2) ===== */
@@ -94,25 +94,8 @@
 
             up    { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
             down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(M)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp F2>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp F1>; };
-        };
-
-        /* ===== B : ブラウザ (layer 6) ===== */
-        zip_mouse_gesture_l6: zip_mouse_gesture_l6 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-
-            stroke-size = <70>;
-            movement-threshold = <8>;
-            idle-timeout-ms = <120>;
-            gesture-cooldown-ms = <220>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(R)>; };   /* Reload */
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(L)>; };   /* Address bar */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };    /* Back */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };    /* Forward */
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
         };
 
         /* ===== T : タブ操作 (layer 7) ===== */
@@ -143,10 +126,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(KP_NUMBER_3))>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(LS(KP_NUMBER_4))>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(KP_NUMBER_5))>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(KP_NUMBER_5))>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(NUMBER_3))>; };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp ESC>; };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(NUMBER_4))>; };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(NUMBER_5))>; };
         };
 
         /* ===== M : メディア (layer 14) ===== */
@@ -166,25 +149,8 @@
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_BRI_UP>; };
         };
 
-        /* ===== C : カーソル (layer 15) ===== */
-        zip_mouse_gesture_l15: zip_mouse_gesture_l15 {
-            compatible = "zmk,input-processor-mouse-gesture";
-            #input-processor-cells = <0>;
-
-            stroke-size = <70>;
-            movement-threshold = <8>;
-            idle-timeout-ms = <120>;
-            gesture-cooldown-ms = <180>;
-            enable-eager-mode;
-
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp UP_ARROW>;    };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp DOWN_ARROW>;  };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LEFT_ARROW>;  };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp RIGHT_ARROW>; };
-        };
-
         /* ===== E : Edit (layer 11) ===== */
-        zip_mouse_gesture_l16: zip_mouse_gesture_l16 {
+        zip_mouse_gesture_l11: zip_mouse_gesture_l11 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
 
@@ -201,7 +167,7 @@
         };
 
         /* ===== R : Range (layer 12) ===== */
-        zip_mouse_gesture_l17: zip_mouse_gesture_l17 {
+        zip_mouse_gesture_l12: zip_mouse_gesture_l12 {
             compatible = "zmk,input-processor-mouse-gesture";
             #input-processor-cells = <0>;
 
@@ -236,13 +202,11 @@
         gesture_l1  { layers = <1>;  input-processors = <&zip_mouse_gesture_l1  &tb_drop_all 0 1>; };
         gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_drop_all 0 1>; };
         gesture_l3  { layers = <3>;  input-processors = <&zip_mouse_gesture_l3  &tb_drop_all 0 1>; };
-        gesture_l6  { layers = <6>;  input-processors = <&zip_mouse_gesture_l6  &tb_drop_all 0 1>; };
         gesture_l7  { layers = <7>;  input-processors = <&zip_mouse_gesture_l7  &tb_drop_all 0 1>; };
         gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_all 0 1>; };
         gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_all 0 1>; };
-        gesture_l15 { layers = <15>; input-processors = <&zip_mouse_gesture_l15 &tb_drop_all 0 1>; };
-        gesture_l16 { layers = <11>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_all 0 1>; };
-        gesture_l17 { layers = <12>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_all 0 1>; };
+        gesture_l11 { layers = <11>; input-processors = <&zip_mouse_gesture_l16 &tb_drop_all 0 1>; };
+        gesture_l12 { layers = <12>; input-processors = <&zip_mouse_gesture_l17 &tb_drop_all 0 1>; };
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
@@ -250,7 +214,7 @@
         compatible = "zmk,layer-listeners";
 
         gesture_auto {
-            layers = <1 2 3 6 7 13 14 15 11 12>;
+            layers = <1 2 3 7 13 14 11 12>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
