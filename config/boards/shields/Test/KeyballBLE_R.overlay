@@ -75,7 +75,7 @@
             enable-eager-mode;
 
             up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LC(DOWN_ARROW)>; };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>; };
             left  { pattern = <GESTURE_LEFT>;  bindings = <&kp F15>; };
             right { pattern = <GESTURE_RIGHT>; bindings = <&kp F14>; };
         };
