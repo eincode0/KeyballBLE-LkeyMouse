@@ -55,17 +55,7 @@
             key-positions = <13 14>; /* F + G */
         };
 
-        layer3_combos {
-            bindings = <&tog 3>;
-            key-positions = <17 18>;
-        };
-
-        layer2_combos {
-            bindings = <&tog 2>;
-            key-positions = <5 6>;
-        };
-
-        drag_on_combo_2 {
+        drag_off_combo {
             bindings = <&drag_off>;
             key-positions = <20 19>;
         };
@@ -203,7 +193,7 @@
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
         };
 
-        FUNCTION {
+        FUNCTION_GESTURE_A {
             bindings = <
 &kp F5                &kp F4            &kp F3            &kp F2    &kp F1                                              &kp LS(RIGHT_ARROW)  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW  &kp LC(TAB)
 &kp F10               &kp F9            &kp F8            &kp F7    &kp F6   &kp ESC                &kp LS(LEFT_ARROW)  &kp LEFT_ARROW       &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp LS(LC(TAB))
@@ -214,7 +204,7 @@
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
         };
 
-        ARROW_SIGN {
+        ARROW_SIGN_GESTURE_D {
             bindings = <
 &kp LEFT_ARROW      &kp LEFT_ARROW       &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ARROW                                     &kp CARET         &kp AMPERSAND      &kp TILDE       &kp LEFT_PARENTHESIS  &mt LEFT_SHIFT RIGHT_PARENTHESIS
 &kp LEFT_ARROW      &kp LEFT_ARROW       &kp DOWN_ARROW   &kp RIGHT_ARROW  &kp HOME         &kp C_MUTE      &kp UNDERSCORE     &kp EXCLAMATION   &kp AT_SIGN        &kp HASH        &kp DOLLAR            &kp PERCENT
@@ -225,7 +215,7 @@
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
-        NUM {
+        NUM_GESTURE_W {
             bindings = <
 &kp KP_NUMBER_5       &kp KP_NUMBER_4  &kp KP_NUMBER_3  &kp KP_NUMBER_2  &kp KP_NUMBER_1                               &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5
 &kp KP_NUMBER_0       &kp KP_NUMBER_9  &kp KP_NUMBER_8  &kp KP_NUMBER_7  &kp KP_NUMBER_6  &kp CAPS      &kp EQUAL      &kp KP_NUMBER_6  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0
@@ -258,7 +248,7 @@
             sensor-bindings = <&inc_dec_kp LG(LA(MINUS)) LG(LA(PLUS))>;
         };
 
-        Bluetooth {
+        Bluetooth_GESTURE_B {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                                              &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &trans  &trans  &trans  &trans  &trans           &trans             &studio_unlock  &trans        &trans        &trans        &trans        &trans
