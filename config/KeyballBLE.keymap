@@ -184,7 +184,7 @@
 
         default_layer {
             bindings = <
-&kp Q             &lt 3 W       &lt 16 E      &lt 17 R     &lt 7 T                                                &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
+&kp Q             &lt 3 W       &lt 11 E      &lt 12 R     &lt 7 T                                                &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
 &lt 1 A           &lt 13 S      &lt 2 D       &kp F        &lt 6 G   &kt LEFT_SHIFT       &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &kp K      &lt 4 L     &lt 2 MINUS
 &mt LEFT_SHIFT Z  &kp X         &lt 15 C      &kp V        &lt 6 B   &kp TAB              &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 14 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
 &kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
@@ -303,7 +303,7 @@
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
 
-        desktop {
+        GESTURE_E {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
@@ -314,7 +314,7 @@
             sensor-bindings = <&inc_dec_kp F15 F14>;
         };
 
-        zoom {
+        GESTURE_R {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
@@ -350,24 +350,6 @@
         };
 
         GESTURE_C {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
-            >;
-        };
-
-        GESTURE_E {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
-            >;
-        };
-
-        GESTURE_R {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
