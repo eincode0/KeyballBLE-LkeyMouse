@@ -62,12 +62,12 @@
 
         key1 {
             bindings = <&kp EXCLAMATION>;
-            key-positions = <16 17>;
+            key-positions = <17 18>;
         };
 
         key2 {
             bindings = <&kp QUESTION>;
-            key-positions = <28 29>;
+            key-positions = <29 30>;
         };
 
         scrl_up {
@@ -127,8 +127,7 @@
         };
     };
 
-    behaviors {  
-
+    behaviors {
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
