@@ -36,7 +36,7 @@
     flavor = "tap-preferred";
 };
 
-/ {
+ / {
     combos {
         compatible = "zmk,combos";
 
@@ -92,16 +92,26 @@
     };
 
     macros {
-        safari_reload_once: safari_reload_once {
+        /* ===== IME switch: Ctrl -> Space を順番固定で送る ===== */
+         ime_switch: ime_switch {
             compatible = "zmk,behavior-macro";
+            label = "IME_SWITCH";
             #binding-cells = <0>;
             bindings =
-                <&macro_press>,
-                <&kp LGUI>,
-                <&macro_tap>,
-                <&kp R>,
-                <&macro_release>,
-                <&kp LGUI>;
+                <&macro_press   &kp LCTRL>
+                <&macro_wait_ms 10>
+                <&macro_tap     &kp SPACE>
+                <&macro_release &kp LCTRL>;
+        };
+
+        safari_reload_once: safari_reload_once {
+            compatible = "zmk,behavior-macro";
+            label = "SAFARI_RELOAD_ONCE";
+            #binding-cells = <0>;
+            bindings =
+                <&macro_press   &kp LGUI>
+                <&macro_tap     &kp R>
+                <&macro_release &kp LGUI>;
         };
 
         to_layer_0: to_layer_0 {
@@ -115,18 +125,32 @@
             compatible = "zmk,behavior-macro";
             label = "DRAG_ON";
             #binding-cells = <0>;
-            bindings = <&macro_press>, <&mkp MB1>;
+            bindings =
+                <&macro_press &mkp MB1>;
         };
 
         drag_off: drag_off {
             compatible = "zmk,behavior-macro";
             label = "DRAG_OFF";
             #binding-cells = <0>;
-            bindings = <&macro_release>, <&mkp MB1>;
+            bindings =
+                <&macro_release &mkp MB1>;
         };
     };
 
     behaviors {
+        /* ===== タップ=IME切替 / ホールド=MO(2)（iMac向け安定） ===== */
+        lt_ime: lt_ime {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LT_IME";
+            bindings = <&mo>, <&ime_switch>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <120>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
+        };
+
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
@@ -187,7 +211,7 @@
 &kp Q             &lt 3 W       &lt 11 E      &lt 12 R     &lt 7 T                                                &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
 &lt 1 A           &lt 13 S      &lt 2 D       &kp F        &lt 6 G   &kt LEFT_SHIFT       &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &kp K      &lt 4 L     &lt 2 MINUS
 &mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB              &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 14 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
-&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 LC(SPACE)      &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
+&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt_ime 2 SPACE       &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
