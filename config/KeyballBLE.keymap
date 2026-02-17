@@ -23,7 +23,6 @@
 /* ===============================
  * mouse-gesture の hold-tap 必須設定（ビルド落ち対策）
  * =============================== */
-
 &mouse_gesture_kp {
     tapping-term-ms = <200>;
     quick-tap-ms = <0>;
@@ -36,7 +35,7 @@
     flavor = "tap-preferred";
 };
 
-/ {
+ / {
     combos {
         compatible = "zmk,combos";
 
@@ -98,9 +97,9 @@
             label = "IME_SWITCH";
             #binding-cells = <0>;
             bindings =
-                <&macro_press   &kp LCTRL>
-                <&macro_wait_ms 10>
-                <&macro_tap     &kp SPACE>
+                <&macro_press   &kp LCTRL>,
+                <&macro_wait_ms 10>,
+                <&macro_tap     &kp SPACE>,
                 <&macro_release &kp LCTRL>;
         };
 
@@ -109,8 +108,8 @@
             label = "SAFARI_RELOAD_ONCE";
             #binding-cells = <0>;
             bindings =
-                <&macro_press   &kp LGUI>
-                <&macro_tap     &kp R>
+                <&macro_press   &kp LGUI>,
+                <&macro_tap     &kp R>,
                 <&macro_release &kp LGUI>;
         };
 
@@ -125,22 +124,20 @@
             compatible = "zmk,behavior-macro";
             label = "DRAG_ON";
             #binding-cells = <0>;
-            bindings =
-                <&macro_press &mkp MB1>;
+            bindings = <&macro_press &mkp MB1>;
         };
 
         drag_off: drag_off {
             compatible = "zmk,behavior-macro";
             label = "DRAG_OFF";
             #binding-cells = <0>;
-            bindings =
-                <&macro_release &mkp MB1>;
+            bindings = <&macro_release &mkp MB1>;
         };
     };
 
     behaviors {
         /* ===== タップ=IME切替 / ホールド=MO(2)（iMac向け安定） =====
-         * 重要: ime_switch が 0セルなので lt_ime は 1セルにする
+         * ime_switch が 0セルなので lt_ime は 1セル
          */
         lt_ime: lt_ime {
             compatible = "zmk,behavior-hold-tap";
@@ -170,7 +167,6 @@
             label = "ROTATE";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
-
             tap-ms = <20>;
         };
 
@@ -350,10 +346,6 @@
 
             sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
         };
-
-        /* ============================
-         * layer13: gesture enable layer
-         * ============================ */
 
         GESTURE_S {
             bindings = <
