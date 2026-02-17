@@ -23,6 +23,7 @@
 /* ===============================
  * mouse-gesture の hold-tap 必須設定（ビルド落ち対策）
  * =============================== */
+
 &mouse_gesture_kp {
     tapping-term-ms = <200>;
     quick-tap-ms = <0>;
@@ -35,7 +36,7 @@
     flavor = "tap-preferred";
 };
 
- / {
+/ {
     combos {
         compatible = "zmk,combos";
 
@@ -96,9 +97,12 @@
             label = "SAFARI_RELOAD_ONCE";
             #binding-cells = <0>;
             bindings =
-                <&macro_press   &kp LGUI>,
-                <&macro_tap     &kp R>,
-                <&macro_release &kp LGUI>;
+                <&macro_press>,
+                <&kp LGUI>,
+                <&macro_tap>,
+                <&kp R>,
+                <&macro_release>,
+                <&kp LGUI>;
         };
 
         to_layer_0: to_layer_0 {
@@ -112,14 +116,14 @@
             compatible = "zmk,behavior-macro";
             label = "DRAG_ON";
             #binding-cells = <0>;
-            bindings = <&macro_press &mkp MB1>;
+            bindings = <&macro_press>, <&mkp MB1>;
         };
 
         drag_off: drag_off {
             compatible = "zmk,behavior-macro";
             label = "DRAG_OFF";
             #binding-cells = <0>;
-            bindings = <&macro_release &mkp MB1>;
+            bindings = <&macro_release>, <&mkp MB1>;
         };
     };
 
@@ -129,6 +133,7 @@
          * - hold-tap は #binding-cells=2 固定
          * - レイヤー誤爆を抑えるため require-prior-idle-ms を入れる
          * =============================== */
+
         lt_ime: lt_ime {
             compatible = "zmk,behavior-hold-tap";
             label = "LT_IME";
@@ -158,6 +163,7 @@
             label = "ROTATE";
             #sensor-binding-cells = <0>;
             bindings = <&msc MOVE_UP>, <&msc MOVE_DOWN>;
+
             tap-ms = <20>;
         };
 
@@ -197,10 +203,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &lt 3 W       &lt 11 E      &lt 12 R     &lt 7 T                                                &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
-&lt 1 A           &lt 13 S      &lt 2 D       &kp F        &lt 6 G   &kt LEFT_SHIFT       &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &kp K      &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB              &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 14 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
-&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt_ime 2 LC(SPACE)  &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
+&kp Q             &lt 3 W       &lt 11 E      &lt 12 R     &lt 7 T                                               &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
+&lt 1 A           &lt 13 S      &lt 2 D       &kp F        &lt 6 G   &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &kp K      &lt 4 L     &lt 2 MINUS
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 14 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
+&kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
