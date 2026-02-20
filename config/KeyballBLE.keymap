@@ -222,16 +222,16 @@
         mm_l2_left:  mm_l2_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>,                 <&kp F15>;                 };
         mm_l2_right: mm_l2_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>,                 <&kp F14>;                 };
 
-        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };
-        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };
-        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };
-        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };
+        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };   /* Up: 最大化 */
+        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };   /* Down: 通常=LG(M) / Shift=中央 */
+        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };   /* Left: 通常=MB4 / Shift=左半分 */
+        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };   /* Right: 通常=MB5 / Shift=右半分 */
 
-        mm_l7_up:    mm_l7_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(T)>,               <&kp LG(T)>;               };
-        mm_l7_down:  mm_l7_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,               <&kp LG(W)>;               };
-        mm_l7_left:  mm_l7_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(LS(TAB))>,         <&kp LC(LS(TAB))>;         };
-        mm_l7_right: mm_l7_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(TAB)>,            <&kp LC(TAB)>;            };
-
+        mm_l7_up:    mm_l7_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(T)>,        <&kp LG(R)>;    };  /* T Up: 通常=新規タブ / Shift=リロード */
+        mm_l7_down:  mm_l7_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,        <&kp LG(F)>;    };  /* T Down: 通常=タブ閉じる / Shift=検索 */
+        mm_l7_left:  mm_l7_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(LS(TAB))>,  <&kp LG(LBKT)>; };  /* T Left: 通常=前タブ / Shift=戻る(⌘[) */
+        mm_l7_right: mm_l7_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(TAB)>,      <&kp LG(RBKT)>; };  /* T Right: 通常=次タブ / Shift=進む(⌘]) */
+       
         mm_l11_up:    mm_l11_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(C)>,              <&kp LG(C)>;              };
         mm_l11_down:  mm_l11_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(V)>,              <&kp LG(V)>;              };
         mm_l11_left:  mm_l11_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(Z)>,              <&kp LG(Z)>;              };
