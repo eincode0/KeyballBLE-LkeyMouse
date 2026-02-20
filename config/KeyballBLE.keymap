@@ -139,6 +139,9 @@
                 , <&macro_param_2to1>, <&macro_release &kp MACRO_PLACEHOLDER>
                 , <&macro_param_1to1>, <&macro_release &mo MACRO_PLACEHOLDER>;
         };
+        vol_max: vol_max { compatible = "zmk,behavior-macro"; label = "VOL_MAX"; #binding-cells = <0>; bindings = <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP> , <&macro_tap &kp C_VOLUME_UP>; };
+        bri_min: bri_min { compatible = "zmk,behavior-macro"; label = "BRI_MIN"; #binding-cells = <0>; bindings = <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN> , <&macro_tap &kp C_BRI_DN>; };
+        bri_max: bri_max { compatible = "zmk,behavior-macro"; label = "BRI_MAX"; #binding-cells = <0>; bindings = <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP> , <&macro_tap &kp C_BRI_UP>; };
     };
 
     behaviors {
