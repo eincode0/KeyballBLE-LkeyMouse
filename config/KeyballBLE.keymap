@@ -212,10 +212,10 @@
          *  - いまは Shift側も同じにして「動作不変」
          *  - 後で bindings の2個目だけ差し替える
          * =============================== */
-        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };   /* Up: 最大化 */
-        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };   /* Down: 通常=LG(M) / Shift=中央 */
-        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };   /* Left: 通常=MB4 / Shift=左半分 */
-        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };   /* Right: 通常=MB5 / Shift=右半分 */
+        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };  /* W Up: 最大化 */
+        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };  /* W Down: 通常=LG(M) / Shift=中央 */
+        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };  /* W Left: 通常=MB4 / Shift=左半分 */
+        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };  /* W Right: 通常=MB5 / Shift=右半分 */
 
         mm_l2_up:    mm_l2_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(UP_ARROW)>,        <&kp LC(UP_ARROW)>;        };
         mm_l2_down:  mm_l2_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(H)>,               <&kp LG(H)>;               };
