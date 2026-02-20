@@ -212,20 +212,20 @@
          *  - いまは Shift側も同じにして「動作不変」
          *  - 後で bindings の2個目だけ差し替える
          * =============================== */
-        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };  /* W Up: 最大化 */
-        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };  /* W Down: 通常=LG(M) / Shift=中央 */
-        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };  /* W Left: 通常=MB4 / Shift=左半分 */
-        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };  /* W Right: 通常=MB5 / Shift=右半分 */
+        mm_l1_up:    mm_l1_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(B)>,               <&kp LC(B)>;               };
+        mm_l1_down:  mm_l1_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(SPACE)>,           <&kp LG(SPACE)>;           };
+        mm_l1_left:  mm_l1_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(Q)>,               <&kp LG(Q)>;               };
+        mm_l1_right: mm_l1_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,               <&kp LG(W)>;               };
 
         mm_l2_up:    mm_l2_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(UP_ARROW)>,        <&kp LC(UP_ARROW)>;        };
         mm_l2_down:  mm_l2_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(H)>,               <&kp LG(H)>;               };
         mm_l2_left:  mm_l2_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>,                 <&kp F15>;                 };
         mm_l2_right: mm_l2_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>,                 <&kp F14>;                 };
 
-        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,                  <&kp F3>;                  };
-        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,               <&kp LG(M)>;               };
-        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,               <&mkp MB4>;               };
-        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,               <&mkp MB5>;               };
+        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };
+        mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };
+        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };
+        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };
 
         mm_l7_up:    mm_l7_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(T)>,               <&kp LG(T)>;               };
         mm_l7_down:  mm_l7_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,               <&kp LG(W)>;               };
