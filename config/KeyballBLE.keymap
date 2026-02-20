@@ -471,13 +471,13 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(LS(TAB))>, <&kp LG(LBKT)>;
+            bindings = <&kp LC(LS(TAB))>, <&kp LG(MINUS)>;
         };  /* T Left: 通常=前タブ / Shift=戻る(⌘[) */
         mm_l7_right: mm_l7_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(TAB)>, <&kp LG(RBKT)>;
+            bindings = <&kp LC(TAB)>, <&kp LG(PLUS)>;
         };  /* T Right: 通常=次タブ / Shift=進む(⌘]) */
         mm_l11_up: mm_l11_up {
             compatible = "zmk,behavior-mod-morph";
