@@ -1,8 +1,9 @@
 /* ===============================
- * KeyballBLE_R.overlay（全置き換え / 展開版）
+ * KeyballBLE_R.overlay（全置き換え / 展開版：mm_* 分岐対応）
  *  - tb_wheel_rema : 常時スクロール端数繰り越し
  *  - tb_drop_all   : ジェスチャ中は REL_X/Y/WHEEL/HWHEEL を 0倍（完全停止）
  *  - 各レイヤーで mouse-gesture を切替
+ *  - gesture の bindings は keymap 側の mm_l*_dir（Mod-Morph）へ委譲
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -58,10 +59,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(B)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(SPACE)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Q)>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(W)>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l1_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l1_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l1_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l1_right>; };
         };
 
         /* ===== D : デスクトップ (layer 2) ===== */
@@ -75,10 +76,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LC(UP_ARROW)>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(H)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp F15>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp F14>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l2_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l2_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l2_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l2_right>; };
         };
 
         /* ===== W : ウィンドウ (layer 3) ===== */
@@ -92,10 +93,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp F3>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(M)>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&mkp MB4>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&mkp MB5>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l3_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l3_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l3_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l3_right>; };
         };
 
         /* ===== T : タブ操作 (layer 7) ===== */
@@ -109,10 +110,10 @@
             gesture-cooldown-ms = <180>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(T)>;        }; /* 新規タブ */
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(W)>;        }; /* タブを閉じる */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LC(LS(TAB))>;  }; /* 前のタブ */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LC(TAB)>;      }; /* 次のタブ */
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l7_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l7_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l7_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l7_right>; };
         };
 
         /* ===== S : スクショ (layer 13) ===== */
@@ -126,10 +127,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(LS(NUMBER_3))>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp ESC>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(LS(NUMBER_4))>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(NUMBER_5))>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l13_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l13_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l13_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l13_right>; };
         };
 
         /* ===== M : メディア (layer 14) ===== */
@@ -143,10 +144,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp C_VOLUME_UP>; };
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp C_VOLUME_DOWN>; };
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp C_BRI_DN>; };
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp C_BRI_UP>; };
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l14_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l14_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l14_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l14_right>; };
         };
 
         /* ===== E : Edit (layer 11) ===== */
@@ -160,10 +161,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(C)>; };         /* Copy */
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(V)>; };         /* Paste */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LG(Z)>; };         /* Undo */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LG(LS(Z))>; };     /* Redo */
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l11_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l11_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l11_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l11_right>; };
         };
 
         /* ===== R : Range (layer 12) ===== */
@@ -177,10 +178,10 @@
             gesture-cooldown-ms = <220>;
             enable-eager-mode;
 
-            up    { pattern = <GESTURE_UP>;    bindings = <&kp LG(A)>; };          /* Select All */
-            down  { pattern = <GESTURE_DOWN>;  bindings = <&kp LG(X)>; };            /* カット */
-            left  { pattern = <GESTURE_LEFT>;  bindings = <&kp LA(LS(LEFT_ARROW))>; };   /* 単語選択← */
-            right { pattern = <GESTURE_RIGHT>; bindings = <&kp LA(LS(RIGHT_ARROW))>; };  /* 単語選択→ */
+            up    { pattern = <GESTURE_UP>;    bindings = <&mm_l12_up>;    };
+            down  { pattern = <GESTURE_DOWN>;  bindings = <&mm_l12_down>;  };
+            left  { pattern = <GESTURE_LEFT>;  bindings = <&mm_l12_left>;  };
+            right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l12_right>; };
         };
     };
 
