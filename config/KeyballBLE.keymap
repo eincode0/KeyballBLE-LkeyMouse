@@ -225,7 +225,7 @@
         mm_l2_left:  mm_l2_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>,          <&kp LG(LS(TAB))>;  };  /* Shift=前のアプリ */
         mm_l2_right: mm_l2_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>,          <&kp LG(TAB)>;      };  /* Shift=次のアプリ */
 
-        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,      <&kp F3>;   };   /* Up: 最大化 */
+        mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>, <&kp LC(LG(F))>; };
         mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>,   <&kp F17>;  };   /* Down: 通常=LG(M) / Shift=中央 */
         mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };   /* Left: 通常=MB4 / Shift=左半分 */
         mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };   /* Right: 通常=MB5 / Shift=右半分 */
