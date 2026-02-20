@@ -1,4 +1,4 @@
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 120    // default: 10
+define ZMK_POINTING_DEFAULT_SCRL_VAL 120    // default: 10
 
 #include "dts/mouse-gesture.local.dtsi"
 #include <behaviors.dtsi>
@@ -217,18 +217,18 @@
          * =============================== */
         mm_l1_up:    mm_l1_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(B)>,               <&kp LC(B)>;               };
         mm_l1_down:  mm_l1_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(SPACE)>,           <&kp LG(SPACE)>;           };
-        mm_l1_left:  mm_l1_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(Q)>,               <&kp LG(Q)>;               };
-        mm_l1_right: mm_l1_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,               <&kp LG(W)>;               };
+        mm_l1_left:  mm_l1_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(TAB))>,         <&kp LG(Q)>;               };
+        mm_l1_right: mm_l1_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(TAB)>,             <&kp LG(W)>;               };
 
         mm_l2_up:    mm_l2_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LC(UP_ARROW)>, <&kp F12>; };
         mm_l2_down:  mm_l2_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(H)>,        <&kp F16>;          };  /* Shift=デスクトップ表示(仮:F11) */
-        mm_l2_left:  mm_l2_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>,          <&kp LG(LS(TAB))>;  };  /* Shift=前のアプリ */
-        mm_l2_right: mm_l2_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>,          <&kp LG(TAB)>;      };  /* Shift=次のアプリ */
+        mm_l2_left:  mm_l2_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F15>,          <&kp F20>;  };  /* Shift=前のアプリ */
+        mm_l2_right: mm_l2_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F14>,          <&kp F20>;      };  /* Shift=次のアプリ */
 
         mm_l3_up:    mm_l3_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp F3>,    <&kp HOME>; };
         mm_l3_down:  mm_l3_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(M)>, <&kp END>;  };
-        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB4>,    <&kp F2>;   };   /* Left: 通常=MB4 / Shift=左半分 */
-        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&mkp MB5>,    <&kp F1>;   };   /* Right: 通常=MB5 / Shift=右半分 */
+        mm_l3_left:  mm_l3_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(Q)>,    <&mkp MB4>;   };   /* Left: 通常=MB4 / Shift=左半分 */
+        mm_l3_right: mm_l3_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,    <&mkp MB5>;   };   /* Right: 通常=MB5 / Shift=右半分 */
 
         mm_l7_up:    mm_l7_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(T)>,        <&kp LG(R)>;    };  /* T Up: 通常=新規タブ / Shift=リロード */
         mm_l7_down:  mm_l7_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(W)>,        <&kp LG(F)>;    };  /* T Down: 通常=タブ閉じる / Shift=検索 */
