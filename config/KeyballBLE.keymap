@@ -5,10 +5,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-#define MOUSE 4
-#define SCROLL 5
-#define NUM 6
-
 &msc {
     time-to-max-speed-ms = <0>;
     acceleration-exponent = <0>;
@@ -18,10 +14,6 @@
     flavor = "balanced";
     quick-tap-ms = <0>;
 };
-
-/* ===============================
- * mouse-gesture の hold-tap 必須設定（ビルド落ち対策）
- * =============================== */
 
 &mouse_gesture_kp {
     tapping-term-ms = <200>;
@@ -388,28 +380,28 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LC(B)>, <&kp LC(B)>;
+            bindings = <&kp LC(B)>, <&kp LC(LG(NUMBER_1))>;
         };
 
         mm_l1_down: mm_l1_down {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(SPACE)>, <&kp LG(SPACE)>;
+            bindings = <&kp LG(SPACE)>, <&kp LC(LG(NUMBER_4))>;
         };
 
         mm_l1_left: mm_l1_left {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(LS(TAB))>, <&kp LG(Q)>;
+            bindings = <&kp LG(LS(TAB))>, <&kp LC(LG(NUMBER_3))>;
         };
 
         mm_l1_right: mm_l1_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(TAB)>, <&kp LG(W)>;
+            bindings = <&kp LG(TAB)>, <&kp LC(LG(NUMBER_2))>;
         };
 
         mm_l2_up: mm_l2_up {
