@@ -250,10 +250,10 @@
         mm_l13_left:  mm_l13_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(NUMBER_4))>, <&kp LC(LG(LS(NUMBER_4)))>;     };
         mm_l13_right: mm_l13_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp LG(LS(NUMBER_5))>, <&kp LG(LS(NUMBER_5))>;         };
 
-        mm_l14_up:    mm_l14_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_UP>,       <&kp C_VOLUME_UP>;       };
-        mm_l14_down:  mm_l14_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_DOWN>,     <&kp C_VOLUME_DOWN>;     };
-        mm_l14_left:  mm_l14_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_DN>,          <&kp C_BRI_DN>;          };
-        mm_l14_right: mm_l14_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_UP>,          <&kp C_BRI_UP>;          };
+        mm_l14_up:    mm_l14_up    { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_UP>,   <&vol_max>; };
+        mm_l14_down:  mm_l14_down  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_VOLUME_DOWN>, <&kp C_MUTE>; };
+        mm_l14_left:  mm_l14_left  { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_DN>,      <&bri_min>; };
+        mm_l14_right: mm_l14_right { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>; mods = <(MOD_LSFT|MOD_RSFT)>; bindings = <&kp C_BRI_UP>,      <&bri_max>; };
     };
 
     keymap {
