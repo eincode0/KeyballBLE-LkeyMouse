@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/Dist16384
     - name: eincode0
       url-base: https://github.com/eincode0
+      - name: sayu-hub  # pmw3610-driver のフォーク
+      url-base: https://github.com/sayu-hub
 
     # 追加
     - name: ssbb
