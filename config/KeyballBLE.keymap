@@ -1,4 +1,5 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 120    // default: 10
+
 #include "dts/mouse-gesture.local.dtsi"
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -42,7 +43,7 @@
         };
 
         ps_photo_toggle {
-            bindings = <&tog 8>;
+            bindings = <&tog 0>;
             key-positions = <13 14>; /* F + G */
         };
 
@@ -313,63 +314,6 @@
          *  1回 = 従来の &lt
          *  2回 = Shift付きジェスチャ（&lm LSHFT）
          * =============================== */
-
-        td_lt_a: td_lt_a {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 1 A>, <&lm 1  LSHFT>;
-        };
-
-        td_lt_s: td_lt_s {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 13 S>, <&lm 13 LSHFT>;
-        };
-
-        td_lt_d: td_lt_d {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 2 D>, <&lm 2  LSHFT>;
-        };
-
-        td_lt_w: td_lt_w {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 3 W>, <&lm 3  LSHFT>;
-        };
-
-        td_lt_e: td_lt_e {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 11 E>, <&lm 11 LSHFT>;
-        };
-
-        td_lt_r: td_lt_r {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 12 R>, <&lm 12 LSHFT>;
-        };
-
-        td_lt_t: td_lt_t {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 7 T>, <&lm 7  LSHFT>;
-        };
-
-        td_lt_m: td_lt_m {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&lt 14 M>, <&lm 14 LSHFT>;
-        };
-
         /* ===============================
          * ★追加：mouse-gesture 分岐枠（Shift有無で2系統）
          *  - いまは Shift側も同じにして「動作不変」
@@ -597,16 +541,16 @@
 
         default_layer {
             bindings = <
-&kp Q             &td_lt_w      &td_lt_e      &td_lt_r     &td_lt_t                                              &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
-&td_lt_a          &td_lt_s      &td_lt_d      &kp F        &lt 6 G   &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &lt 5 K    &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &td_lt_m  &kp COMMA  &kp PERIOD  &lt 3 PLUS
+&kp Q             &lt 14 W      &lt 7 E       &lt 8 R      &lt 11 T                                              &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
+&lt 12 A          &lt 9 S       &lt 13 D      &kp F        &lt 6 G   &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &lt 5 K    &lt 4 L     &lt 2 MINUS
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 10 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
 &kp LCTRL         &kp LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
         };
 
-        FUNCTION_GESTURE_A {
+        FUNCTION {
             bindings = <
 &kp F5                &kp F4            &kp F3            &kp F2    &kp F1                                              &kp LS(RIGHT_ARROW)  &kp LEFT_ARROW  &kp UP_ARROW    &kp RIGHT_ARROW  &kp LC(TAB)
 &kp F10               &kp F9            &kp F8            &kp F7    &kp F6   &kp ESC                &kp LS(LEFT_ARROW)  &kp LEFT_ARROW       &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp LS(LC(TAB))
@@ -617,7 +561,7 @@
             sensor-bindings = <&inc_dec_kp RIGHT_ARROW LEFT_ARROW>;
         };
 
-        ARROW_SIGN_GESTURE_D {
+        ARROW_SIGN {
             bindings = <
 &kp LEFT_ARROW      &kp LEFT_ARROW       &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ARROW                                     &kp CARET         &kp AMPERSAND      &kp TILDE       &kp LEFT_PARENTHESIS  &mt LEFT_SHIFT RIGHT_PARENTHESIS
 &kp LEFT_ARROW      &kp LEFT_ARROW       &kp DOWN_ARROW   &kp RIGHT_ARROW  &kp HOME         &kp C_MUTE      &kp UNDERSCORE     &kp EXCLAMATION   &kp AT_SIGN        &kp HASH        &kp DOLLAR            &kp PERCENT
@@ -628,7 +572,7 @@
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
-        NUM_GESTURE_W {
+        NUM {
             bindings = <
 &kp KP_NUMBER_5       &kp KP_NUMBER_4  &kp KP_NUMBER_3  &kp KP_NUMBER_2  &kp KP_NUMBER_1                               &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_NUMBER_4  &kp KP_NUMBER_5
 &kp KP_NUMBER_0       &kp KP_NUMBER_9  &kp KP_NUMBER_8  &kp KP_NUMBER_7  &kp KP_NUMBER_6  &kp CAPS      &kp EQUAL      &kp KP_NUMBER_6  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_NUMBER_0
@@ -642,7 +586,7 @@
         MOUSE {
             bindings = <
 &mmv MOVE_LEFT       &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &kp LG(T)                                            &kp LG(Z)       &mkp MB5      &lt_mkp 5 MB4  &kp LG(A)  &kp LC(H)
-&msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &mo 11     &mkp MB3             &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1       &trans     &lt 5 ENTER
+&msc MOVE_RIGHT      &msc MOVE_DOWN  &msc MOVE_UP    &msc MOVE_LEFT   &mo 7      &mkp MB3             &safari_reload_once  &mkp MB3        &mkp MB2      &mkp MB1       &trans     &lt 5 ENTER
 &mt LEFT_SHIFT HOME  &kp END         &kp DOWN_ARROW  &kp UP_ARROW     &mkp MB2   &mkp MB1             &kp LG(C)            &kp LG(V)       &kp UP_ARROW  &drag_off      &kp LG(X)  &lt 5 BACKSPACE
 &kp LG(P)            &mkp MB5        &mkp MB4        &kp LEFT_ARROW   &kp TAB    &kp RIGHT_ARROW      &drag_on             &kp DOWN_ARROW                                          &trans
             >;
@@ -653,7 +597,7 @@
         SCROLL {
             bindings = <
 &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &trans                                      &kp LEFT_SHIFT  &kp RIGHT_ALT  &trans  &kp RIGHT_CONTROL  &trans
-&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 12  &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
+&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
 &trans           &trans          &trans        &trans            &trans  &trans                &trans        &trans          &trans         &trans  &trans             &trans
 &trans           &trans          &trans        &kp LG(NUMBER_9)  &trans  &kp LG(NUMBER_0)      &kp UP_ARROW  &kp DOWN_ARROW                                            &trans
             >;
@@ -670,50 +614,6 @@
             >;
 
             sensor-bindings = <&rotate>;
-        };
-
-        GESTURE_T {
-            bindings = <
-&trans                     &msc SCRL_UP  &msc SCRL_DOWN  &kp LC(PAGE_UP)  &kp LC(PAGE_DOWN)                              &kp LG(R)       &kp PAGE_UP  &kp PAGE_DOWN  &trans  &trans
-&lt_to_layer_0 5 KP_MINUS  &mkp MB1      &mkp MB1        &mkp MB2         &trans             &mkp MB3      &trans        &mkp MB3        &mkp MB2     &mkp MB1       &trans  &lt_to_layer_0 5 KP_MINUS
-&kp HOME                   &kp END       &mkp MB4        &mkp MB5         &mkp MB5           &trans        &trans        &trans          &mkp MB4     &mkp MB5       &trans  &trans
-&trans                     &trans        &trans          &to 0            &trans             &trans        &msc SCRL_UP  &msc SCRL_DOWN                                      &trans
-            >;
-
-            sensor-bindings = <&rotate>;
-        };
-
-        PS_PHOTO {
-            bindings = <
-&kp V      &kp M          &kp C          &kp J          &kp B                               &kp LG(NUMBER_0)  &kp LG(NUMBER_1)  &kp LG(L)  &kp LG(M)  &kp LG(U)
-&kp LG(J)  &kp LG(LS(N))  &kp LG(E)      &kp LG(COMMA)  &kp LG(DOT)    &to 0       &kp ESC  &trans            &trans            &trans     &trans     &trans
-&kp LG(Z)  &kp LG(LS(Z))  &kp LG(LA(Z))  &kp LG(LS(S))  &kp LG(LA(S))  &trans      &trans   &trans            &trans            &trans     &trans     &trans
-&trans     &trans         &trans         &mo 9          &trans         &mo 10      &trans   &trans                                                    &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
-        };
-
-        PS_DRAW {
-            bindings = <
-&kp B   &kp E   &kp I   &kp X   &kp D                          &trans  &trans  &trans  &trans  &trans
-&kp V   &kp M   &kp L   &kp J   &kp C   &kp LG(Z)      &trans  &trans  &trans  &trans  &trans  &trans
-&kp Z   &kp A   &kp S   &kp F   &kp G   &trans         &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans         &trans  &trans                          &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
-        };
-
-        PS_BRUSH {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                         &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &kp LG(Z)      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans         &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans         &trans  &trans                          &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
 
         GESTURE_E {
@@ -748,6 +648,42 @@
         };
 
         GESTURE_M {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        GESTURE_T {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        GESTURE_A {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        GESTURE_D {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+
+        GESTURE_W {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
