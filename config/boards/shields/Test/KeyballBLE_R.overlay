@@ -211,15 +211,7 @@
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
-    layer_listeners {
-        compatible = "zmk,layer-listeners";
-
-        gesture_auto {
-            gesture_auto { layers = <12 13 14 11 7 8 9 10>;
-            bindings = <&mouse_gesture_on &mouse_gesture_off>;
-        };
-    };
-};
+layer_listeners { compatible = "zmk,layer-listeners"; gesture_auto { layers = <12 13 14 11 7 8 9 10>; bindings = <&mouse_gesture_on &mouse_gesture_off>; }; };};
 
 /* ===============================
  * PMW3610 SPI
