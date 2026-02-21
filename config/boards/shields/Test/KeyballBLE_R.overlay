@@ -200,14 +200,14 @@
          *   gesture が先に REL_X/Y を見て判定
          *   その後 tb_drop_all が REL_* 出力を 0倍にして「完全停止」
          */
-        gesture_l1  { layers = <1>;  input-processors = <&zip_mouse_gesture_l1  &tb_drop_all 0 1>; };
-        gesture_l2  { layers = <2>;  input-processors = <&zip_mouse_gesture_l2  &tb_drop_all 0 1>; };
-        gesture_l3  { layers = <3>;  input-processors = <&zip_mouse_gesture_l3  &tb_drop_all 0 1>; };
-        gesture_l7  { layers = <7>;  input-processors = <&zip_mouse_gesture_l7  &tb_drop_all 0 1>; };
-        gesture_l13 { layers = <13>; input-processors = <&zip_mouse_gesture_l13 &tb_drop_all 0 1>; };
-        gesture_l14 { layers = <14>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_all 0 1>; };
-        gesture_l11 { layers = <11>; input-processors = <&zip_mouse_gesture_l11 &tb_drop_all 0 1>; };
-        gesture_l12 { layers = <12>; input-processors = <&zip_mouse_gesture_l12 &tb_drop_all 0 1>; };
+        gesture_l1  { layers = <12>; input-processors = <&zip_mouse_gesture_l1  &tb_drop_all 0 1>; };  /* A = GESTURE_A */
+        gesture_l2  { layers = <13>; input-processors = <&zip_mouse_gesture_l2  &tb_drop_all 0 1>; };  /* D = GESTURE_D */
+        gesture_l3  { layers = <14>; input-processors = <&zip_mouse_gesture_l3  &tb_drop_all 0 1>; };  /* W = GESTURE_W */
+        gesture_l7  { layers = <11>; input-processors = <&zip_mouse_gesture_l7  &tb_drop_all 0 1>; };  /* T = GESTURE_T */
+        gesture_l11 { layers = <7>;  input-processors = <&zip_mouse_gesture_l11 &tb_drop_all 0 1>; };  /* E = GESTURE_E */
+        gesture_l12 { layers = <8>;  input-processors = <&zip_mouse_gesture_l12 &tb_drop_all 0 1>; };  /* R = GESTURE_R */
+        gesture_l13 { layers = <9>;  input-processors = <&zip_mouse_gesture_l13 &tb_drop_all 0 1>; };  /* S = GESTURE_S */
+        gesture_l14 { layers = <10>; input-processors = <&zip_mouse_gesture_l14 &tb_drop_all 0 1>; };  /* M = GESTURE_M */
     };
 
     /* 自動ON/OFF（入場でON / 退場でOFF） */
@@ -215,7 +215,7 @@
         compatible = "zmk,layer-listeners";
 
         gesture_auto {
-            layers = <1 2 3 7 13 14 11 12>;
+            gesture_auto { layers = <12 13 14 11 7 8 9 10>;
             bindings = <&mouse_gesture_on &mouse_gesture_off>;
         };
     };
