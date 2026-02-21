@@ -42,11 +42,6 @@
             key-positions = <7 8>;
         };
 
-        ps_photo_toggle {
-            bindings = <&tog 0>;
-            key-positions = <13 14>; /* F + G */
-        };
-
         drag_off_combo {
             bindings = <&drag_off>;
             key-positions = <20 19>;
