@@ -6,17 +6,14 @@ manifest:
       url-base: https://github.com/Dist16384
     - name: eincode0
       url-base: https://github.com/eincode0
-    - name: sayu-hub  # pmw3610-driver のフォーク
+    - name: sayu-hub
       url-base: https://github.com/sayu-hub
-
-    # 追加
     - name: ssbb
       url-base: https://github.com/ssbb
     - name: kot149
       url-base: https://github.com/kot149
-    - name: caksoylar  # <-- RGB LED
-      url-base: https://github.com/caksoylar  
-
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
 
   projects:
     - name: zmk
@@ -30,23 +27,25 @@ manifest:
       revision: main
       path: modules/zmk-pmw3610-driver
 
-    # 追加: layer on/off で behavior 実行
     - name: zmk-listeners
       remote: ssbb
       revision: v1
       path: modules/zmk-listeners
 
-    # 追加: マウスジェスチャ
     - name: zmk-mouse-gesture
       remote: kot149
       revision: v1
       path: modules/zmk-mouse-gesture
 
+    - name: zmk-scroll-snap
+      remote: kot149
+      revision: v1
+      path: modules/zmk-scroll-snap
+
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: main
       revision: v0.3
-
+      path: modules/zmk-rgbled-widget
 
   self:
     path: config
