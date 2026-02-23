@@ -566,10 +566,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &lt 14 W      &lt 7 E       &lt 8 R      &lt 11 T                                              &kp Y           &kp U     &lt 5 I    &kp O       &mt RIGHT_SHIFT P
-&lt 12 A          &lt 9 S       &lt 13 D      &kp F        &lt 6 G   &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J     &lt 5 K    &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V        &kp B     &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt 10 M  &kp COMMA  &kp PERIOD  &lt 3 PLUS
-&kp LCTRL         &sk LEFT_GUI  &kp LEFT_ALT  &lt 3 SPACE  &mkp MB1  &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                      &kp DELETE
+&kp Q                &lt_to_layer_0 14 W  &lt_to_layer_0 7 E   &lt_to_layer_0 8 R  &lt_to_layer_0 11 T                                              &kp Y           &kp U                &lt_to_layer_0 5 I  &kp O       &mt RIGHT_SHIFT P
+&lt_to_layer_0 12 A  &lt_to_layer_0 9 S   &lt_to_layer_0 13 D  &kp F               &lt 6 G              &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &lt_to_layer_0 5 K  &lt 4 L     &lt 2 MINUS
+&mt LEFT_SHIFT Z     &kp X                &kp C                &kp V               &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt_to_layer_0 10 M  &kp COMMA           &kp PERIOD  &lt 3 PLUS
+&kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE         &mkp MB1             &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                                          &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
