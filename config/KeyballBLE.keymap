@@ -82,12 +82,12 @@
 
         scrl_up {
             bindings = <&msc MOVE_UP>;
-            key-positions = <20 21>;
+            key-positions = <21 33>;
         };
 
         scrl_down {
             bindings = <&msc MOVE_DOWN>;
-            key-positions = <32 33>;
+            key-positions = <33 42>;
         };
 
         left_shift {
