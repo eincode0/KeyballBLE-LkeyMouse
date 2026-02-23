@@ -1,8 +1,10 @@
 /* ===============================
- * KeyballBLE_R.overlay（全置き換え / 改良版）
+ * KeyballBLE_R.overlay（全置き換え / layer16=キーscroll前提）
  *  - WHEEL/HWHEEL 端数繰り越し（常時）
- *  - SCROLL(=layer 5) では scroll-snap で縦/横スナップ
+ *  - SCROLL(=layer 5) では通常スクロール（scroll-layers=5）
+ *  - SCROLL_SNAP(=layer 15) は scroll-snap（現状維持：5がONの時に効く）
  *  - ジェスチャ中は drop_all で REL を止める（現状維持）
+ *  - 追加：SNIPE(=layer 16) は REL_X/Y のみ減速（スクロールはキー側で実施）
  * =============================== */
 
 #include "KeyballBLE.dtsi"
@@ -27,6 +29,9 @@
 
         tb_drop_all: tb_drop_all { compatible = "zmk,input-processor-scaler"; #input-processor-cells = <2>; type = <INPUT_EV_REL>; codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>; };
 
+        /* layer16 用：カーソルだけ減速（例：1/4） */
+        tb_snipe_xy: tb_snipe_xy { compatible = "zmk,input-processor-scaler"; #input-processor-cells = <2>; type = <INPUT_EV_REL>; codes = <INPUT_REL_X INPUT_REL_Y>; };
+
         zip_mouse_gesture_l11: zip_mouse_gesture_l11 { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&mm_l11_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&mm_l11_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&mm_l11_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l11_right>; }; };
         zip_mouse_gesture_l12: zip_mouse_gesture_l12 { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&mm_l12_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&mm_l12_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&mm_l12_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l12_right>; }; };
         zip_mouse_gesture_l13: zip_mouse_gesture_l13 { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&mm_l13_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&mm_l13_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&mm_l13_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l13_right>; }; };
@@ -42,10 +47,14 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
         input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>;
 
         scroller_5 { layers = <5>; input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
         scroller_15 { layers = <15>; input-processors = <&zip_scroll_snap &tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
+
+        /* layer16：カーソルだけ減速（例：1/4） */
+        snipe_16 { layers = <16>; input-processors = <&tb_snipe_xy 1 4>; };
 
         gesture_e { layers = <7>; input-processors = <&zip_mouse_gesture_l11 &tb_drop_all 0 1>; };
         gesture_r { layers = <8>; input-processors = <&zip_mouse_gesture_l12 &tb_drop_all 0 1>; };
