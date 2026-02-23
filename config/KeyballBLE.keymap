@@ -622,7 +622,7 @@
         SCROLL {
             bindings = <
 &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &trans                                      &kp LEFT_SHIFT  &kp RIGHT_ALT  &trans  &kp RIGHT_CONTROL  &trans
-&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
+&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &mo 15             &trans
 &trans           &trans          &trans        &trans            &trans  &trans                &trans        &trans          &trans         &trans  &trans             &trans
 &trans           &trans          &trans        &kp LG(NUMBER_9)  &trans  &kp LG(NUMBER_0)      &kp UP_ARROW  &kp DOWN_ARROW                                            &trans
             >;
@@ -722,7 +722,7 @@
         SCROLL_SNAP {
             bindings = <
 &mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &trans                                      &kp LEFT_SHIFT  &kp RIGHT_ALT  &trans  &kp RIGHT_CONTROL  &trans
-&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &mo 15             &trans
+&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
 &trans           &trans          &trans        &trans            &trans  &trans                &trans        &trans          &trans         &trans  &trans             &trans
 &trans           &trans          &trans        &kp LG(NUMBER_9)  &trans  &kp LG(NUMBER_0)      &kp UP_ARROW  &kp DOWN_ARROW                                            &trans
             >;
