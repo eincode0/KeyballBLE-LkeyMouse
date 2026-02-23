@@ -449,7 +449,7 @@
             bindings = <
 &kp Q                &lt_to_layer_0 14 W  &lt_to_layer_0 7 E   &lt_to_layer_0 8 R   &lt_to_layer_0 11 T                                              &kp Y           &kp U                &lt_to_layer_0 5 I  &kp O       &mt RIGHT_SHIFT P
 &lt_to_layer_0 12 A  &lt_to_layer_0 9 S   &lt_to_layer_0 13 D  &kp F                &lt 6 G              &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &lt_to_layer_0 5 K  &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z     &kp X                &kp C                &lt_to_layer_0 16 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt_to_layer_0 10 M  &kp COMMA           &kp PERIOD  &lt 3 PLUS
+&mt LEFT_SHIFT Z     &kp X                &kp C                &lt_to_layer_0 15 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &lt_to_layer_0 10 M  &kp COMMA           &kp PERIOD  &lt 3 PLUS
 &kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                                          &kp DELETE
             >;
 
@@ -596,17 +596,6 @@
 &trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
 &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
             >;
-        };
-
-        SCROLL_SNAP {
-            bindings = <
-&mmv MOVE_LEFT   &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_RIGHT   &trans                                      &kp LEFT_SHIFT  &kp RIGHT_ALT  &trans  &kp RIGHT_CONTROL  &trans
-&msc MOVE_RIGHT  &msc MOVE_DOWN  &msc MOVE_UP  &msc MOVE_LEFT    &mo 8   &to 0                 &trans        &trans          &trans         &trans  &trans             &trans
-&trans           &trans          &trans        &trans            &trans  &trans                &trans        &trans          &trans         &trans  &trans             &trans
-&trans           &trans          &trans        &kp LG(NUMBER_9)  &trans  &kp LG(NUMBER_0)      &kp UP_ARROW  &kp DOWN_ARROW                                            &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LG(LA(MINUS)) LG(LA(PLUS))>;
         };
 
         /* layer16：キーで遅いスクロール（縦＋横） */
