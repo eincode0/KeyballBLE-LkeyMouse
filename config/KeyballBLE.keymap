@@ -156,123 +156,6 @@
                 <&macro_release>,
                 <&mo MACRO_PLACEHOLDER>;
         };
-
-        vol_max: vol_max {
-            compatible = "zmk,behavior-macro";
-            label = "VOL_MAX";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>,
-                <&macro_tap>,
-                <&kp C_VOLUME_UP>;
-        };
-
-        bri_min: bri_min {
-            compatible = "zmk,behavior-macro";
-            label = "BRI_MIN";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>,
-                <&macro_tap>,
-                <&kp C_BRI_DN>;
-        };
-
-        bri_max: bri_max {
-            compatible = "zmk,behavior-macro";
-            label = "BRI_MAX";
-            #binding-cells = <0>;
-            bindings =
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>,
-                <&macro_tap>,
-                <&kp C_BRI_UP>;
-        };
     };
 
     behaviors {
@@ -380,7 +263,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp F15>, <&kp F20>;
+            bindings = <&kp F15>, <&kp F11>;
         };
 
         mm_l2_right: mm_l2_right {
@@ -408,14 +291,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(Q)>, <&mkp MB4>;
+            bindings = <&mkp MB4>, <&kp LG(Q)>;
         };
 
         mm_l3_right: mm_l3_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp LG(W)>, <&mkp MB5>;
+            bindings = <&mkp MB5>, <&kp LG(W)>;
         };
 
         mm_l7_up: mm_l7_up {
@@ -534,7 +417,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_UP>, <&vol_max>;
+            bindings = <&kp C_VOLUME_UP>, <&kp C_VOLUME_UP>;
         };
 
         mm_l14_down: mm_l14_down {
@@ -548,14 +431,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_DN>, <&bri_min>;
+            bindings = <&kp C_BRI_DN>, <&kp C_BRI_DN>;
         };
 
         mm_l14_right: mm_l14_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_UP>, <&bri_max>;
+            bindings = <&kp C_BRI_UP>, <&kp C_BRI_UP>;
         };
     };
 
