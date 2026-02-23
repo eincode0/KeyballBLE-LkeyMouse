@@ -20,7 +20,7 @@
  *  - mm_l*_dir は overlay の zip_mouse_gesture_* から呼ばれる
  * =============================== */
 
-#define ZMK_POINTING_DEFAULT_SCRL_VAL 120
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
 
 #include "dts/mouse-gesture.local.dtsi"
 #include <dt-bindings/zmk/mouse.h>
@@ -30,8 +30,8 @@
 #include <dt-bindings/zmk/pointing.h>
 
 &msc {
-    time-to-max-speed-ms = <0>;
-    acceleration-exponent = <0>;
+    time-to-max-speed-ms = <250>;
+    acceleration-exponent = <1>;
 };
 
 &mt {
