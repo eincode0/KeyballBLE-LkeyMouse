@@ -29,7 +29,7 @@
 
         tb_drop_all: tb_drop_all { compatible = "zmk,input-processor-scaler"; #input-processor-cells = <2>; type = <INPUT_EV_REL>; codes = <INPUT_REL_X INPUT_REL_Y INPUT_REL_WHEEL INPUT_REL_HWHEEL>; };
 
-        /* layer16 用：カーソルだけ減速（例：1/4） */
+        /* layer15 用：カーソルだけ減速（例：1/4） */
         tb_snipe_xy: tb_snipe_xy { compatible = "zmk,input-processor-scaler"; #input-processor-cells = <2>; type = <INPUT_EV_REL>; codes = <INPUT_REL_X INPUT_REL_Y>; };
 
         zip_mouse_gesture_l11: zip_mouse_gesture_l11 { compatible = "zmk,input-processor-mouse-gesture"; #input-processor-cells = <0>; stroke-size = <60>; movement-threshold = <6>; idle-timeout-ms = <110>; gesture-cooldown-ms = <130>; enable-eager-mode; up { pattern = <GESTURE_UP>; bindings = <&mm_l11_up>; }; down { pattern = <GESTURE_DOWN>; bindings = <&mm_l11_down>; }; left { pattern = <GESTURE_LEFT>; bindings = <&mm_l11_left>; }; right { pattern = <GESTURE_RIGHT>; bindings = <&mm_l11_right>; }; };
@@ -52,8 +52,8 @@
 
         scroller_5 { layers = <5>; input-processors = <&tb_wheel_rema 1 1 &tb_hwheel_rema 1 1>; };
 
-        /* layer16：カーソルだけ減速（例：1/4） */
-        snipe_16 { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
+        /* layer15：カーソルだけ減速（例：1/4） */
+        snipe_15 { layers = <15>; input-processors = <&tb_snipe_xy 1 4>; };
 
         gesture_e { layers = <7>; input-processors = <&zip_mouse_gesture_l11 &tb_drop_all 0 1>; };
         gesture_r { layers = <8>; input-processors = <&zip_mouse_gesture_l12 &tb_drop_all 0 1>; };
