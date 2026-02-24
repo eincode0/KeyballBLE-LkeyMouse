@@ -417,7 +417,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_VOLUME_UP>, <&kp C_VOLUME_UP>;
+            bindings = <&kp C_VOLUME_UP>, <&kp F13>;
         };
 
         mm_l14_down: mm_l14_down {
@@ -431,14 +431,14 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_DN>, <&kp C_BRI_DN>;
+            bindings = <&kp C_BRI_DN>, <&kp F19>;
         };
 
         mm_l14_right: mm_l14_right {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
-            bindings = <&kp C_BRI_UP>, <&kp C_BRI_UP>;
+            bindings = <&kp C_BRI_UP>, <&kp F18>;
         };
     };
 
