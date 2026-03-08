@@ -473,8 +473,8 @@
         default_layer {
             bindings = <
 &kp Q                &gesture_mo_kp 14 W  &gesture_mo_kp 7 E   &gesture_mo_kp 8 R   &gesture_mo_kp 11 T                                              &kp Y           &kp U                &gesture_mo_kp 5 I  &kp O       &mt RIGHT_SHIFT P
-&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &lt 4 L     &lt 2 MINUS
-&mt LEFT_SHIFT Z     &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD  &lt 3 PLUS
+&gesture_mo_kp 12 A  &gesture_mo_kp 9 S   &gesture_mo_kp 13 D  &kp F                &lt 6 G              &kt LEFT_SHIFT      &mt LEFT_ALT AT_SIGN    &kp H           &kp J                &gesture_mo_kp 5 K  &lt 4 L     &lt 3 MINUS
+&mt LEFT_SHIFT Z     &kp X                &kp C                &gesture_mo_kp 15 V  &kp B                &kp TAB             &mt LEFT_CONTROL COLON  &mt LEFT_GUI N  &gesture_mo_kp 10 M  &kp COMMA           &kp PERIOD  &lt 2 PLUS
 &kp LCTRL            &sk LEFT_GUI         &kp LEFT_ALT         &lt 3 SPACE          &mkp MB1             &lt 2 CAPS          &kp BACKSPACE           &lt 1 ENTER                                                          &kp DELETE
             >;
 
@@ -549,10 +549,10 @@
 
         GESTURE_E {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp F15 F14>;
@@ -560,10 +560,10 @@
 
         GESTURE_R {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp LG(MINUS) LG(PLUS)>;
@@ -571,55 +571,55 @@
 
         GESTURE_S {
             bindings = <
-&trans  &trans  &trans    &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&mo 5   &trans  &mkp MB1  &mkp MB2        &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans    &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans    &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
         GESTURE_M {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
         GESTURE_T {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
         GESTURE_A {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
         GESTURE_D {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
         GESTURE_W {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                              &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
-&trans  &trans  &trans  &trans          &trans          &trans      &trans  &trans  &trans  &trans          &trans          &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans      &trans  &trans                                          &trans
+&trans  &trans  &trans  &trans          &trans                                      &trans  &trans  &kp LEFT_SHIFT  &trans          &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &trans
+&trans  &trans  &trans  &trans          &trans          &trans              &trans  &trans  &trans  &trans          &trans          &trans
+&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_SHIFT  &kp LEFT_SHIFT      &trans  &trans                                          &trans
             >;
         };
 
